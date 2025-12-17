@@ -3,6 +3,7 @@ package Monstres;
 public class MonstreVM {
     private String name;
     private String type;
+    private String category;
     private int hpMin;
     private int hpMax;
     private int attackMin;
@@ -16,11 +17,12 @@ public class MonstreVM {
     private int speedMin;
     private int speedMax;
 
-    public MonstreVM(String name, String type, int hpMin, int hpMax, int attackMin, int attackMax, int attackSpeMin,
-                     int attackSpeMax, int defenseMin, int defenseMax, int defenseSpeMin,
-                     int defenseSpeMax, int speedMin, int speedMax) {
+    public MonstreVM(String name, String type, String category, int hpMin, int hpMax, int attackMin,
+                     int attackMax, int attackSpeMin, int attackSpeMax, int defenseMin, int defenseMax,
+                     int defenseSpeMin,int defenseSpeMax, int speedMin, int speedMax) {
         this.name = name;
         this.type = type;
+        this.category = category;
         this.hpMin = hpMin;
         this.hpMax = hpMax;
         this.attackMin = attackMin;
@@ -40,6 +42,10 @@ public class MonstreVM {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setType(String type) {
@@ -99,6 +105,7 @@ public class MonstreVM {
         return "MonstreVM{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
+                ", category='" + category + '\'' +
                 ", hp=" + hpMin + "-" + hpMax +
                 ", attack=" + attackMin + "-" + attackMax +
                 ", attackSpe=" + attackSpeMin + "-" + attackSpeMax +

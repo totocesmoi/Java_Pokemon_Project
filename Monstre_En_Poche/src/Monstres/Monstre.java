@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Monstre {
     private String name;
+    private String type;
     private String category;
     private int ptnVie;
     private int attack;
@@ -15,9 +16,11 @@ public class Monstre {
 
     public ArrayList<Competence> competences;
 
-    public Monstre(String name, int ptnVie, int attack, int attackSpe, int defense,
-                   int defenseSpe, int speed, ArrayList<Competence> competences) {
+    public Monstre(String name, String type, String category,int ptnVie, int attack, int attackSpe,
+                   int defense, int defenseSpe, int speed, ArrayList<Competence> competences) {
         this.name = name;
+        this.type = type;
+        this.category = category;
         this.ptnVie = ptnVie;
         this.attack = attack;
         this.attackSpe = attackSpe;
@@ -83,6 +86,13 @@ public class Monstre {
         this.category = category;
     }
 
+    public String getType() {
+        return type;
+    }
+    private void setType(String type) {
+        this.type = type;
+    }
+
     public ArrayList<Competence> getCompetences() {
         return competences;
     }
@@ -94,6 +104,7 @@ public class Monstre {
     public String toString() {
         return "Monstre{" +
                 "name='" + name + '\'' +
+                "type='" + type + '\'' +
                 "category='" + category + '\'' +
                 ", ptnVie=" + ptnVie +
                 ", attack=" + attack +

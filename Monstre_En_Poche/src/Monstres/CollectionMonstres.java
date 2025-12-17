@@ -46,6 +46,9 @@ public class CollectionMonstres implements IParser {
                             case "Type":
                                 if (parts.length > 1) currentMonstre.setType(parts[1]);
                                 break;
+                            case "Category":
+                                if (parts.length > 1) currentMonstre.setCategory(parts[1]);
+                                break;
                             case "HP":
                                 if (parts.length > 2) {
                                     currentMonstre.setHpMin(Integer.parseInt(parts[1]));
