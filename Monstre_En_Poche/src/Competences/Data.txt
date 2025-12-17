@@ -1,0 +1,24 @@
+Attack
+Name Flammeche
+Type Feu
+Categorie Spe
+Power 40
+NbUse 25
+Accuracy 100
+EndAttack
+Attack
+Name Hydrocanon
+Type Eau
+Categorie Phy
+Power 110
+NbUse 5
+Accuracy 80
+EndAttack
+Attack
+Name Pistolet a Eau
+Type Eau
+Categorie Spe
+Power 30
+NbUse 30
+Accuracy 100
+EndAttack
