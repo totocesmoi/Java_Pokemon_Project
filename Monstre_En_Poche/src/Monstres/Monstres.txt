@@ -1,0 +1,17 @@
+Monster
+Name Pikachu
+Type Electric
+HP 110 141
+Speed 110 141
+Attack 75 106
+Defense 50 82
+EndMonster
+
+Monster
+Name Bulbizarre
+Type Plante
+HP 45 60
+Speed 45 60
+Attack 49 65
+Defense 49 65
+EndMonster
