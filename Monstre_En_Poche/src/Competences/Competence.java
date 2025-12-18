@@ -32,6 +32,22 @@ public class Competence {
         this.accuracy = value;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Integer getAttack() {
+        return attack;
+    }
+
+    public Integer getAttackSpe() {
+        return attackSpe;
+    }
+
     @Override
     public String toString() {
         return "Name=" + this.name + "\nType=" + this.type + "\nPP=" + this.pp + "\nAttack=" + this.attack + "\nAttackSpe=" + this.attackSpe + "\nAccuracy=" + this.accuracy; 

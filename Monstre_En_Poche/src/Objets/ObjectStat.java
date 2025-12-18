@@ -1,21 +1,21 @@
 package Objets;
 
 import Monstres.Monstre;
-import Monstres.StatType;
+import Monstres.Stats;
 
 public class ObjectStat extends Object {
-    private StatType statType;
+    private Stats stats;
     private int value;
 
-    public ObjectStat(String name, StatType statType, int valeur) {
+    public ObjectStat(String name, Stats stats, int valeur) {
         super(name);
-        this.statType = statType;
+        this.stats = stats;
         this.value = valeur;
     }
 
     @Override
     public void useObject(Monstre monstre) {
-        switch (statType) {
+        switch (stats) {
             case PV:
                 monstre.setPtnVie(monstre.getPtnVie() + value);
                 System.out.println(monstre.getName() + " restore " + value + " PV");

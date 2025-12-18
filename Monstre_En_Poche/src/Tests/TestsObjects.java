@@ -2,7 +2,7 @@ package Tests;
 
 import Monstres.Monstre;
 import Monstres.Status;
-import Monstres.StatType;
+import Monstres.Stats;
 import Objets.ObjectStat;
 import Objets.ObjectStatus;
 import java.util.ArrayList;
@@ -15,12 +15,12 @@ public class TestsObjects {
         System.out.println("Monstre initial: " + monstre.getName() + " PV=" + monstre.getPtnVie() + " Status=" + (monstre.getStatus() == null ? "NONE" : monstre.getStatus()));
 
         System.out.println("\n--- Test Potion (+20 PV) ---");
-        ObjectStat potion = new ObjectStat("Potion", StatType.PV, 20);
+        ObjectStat potion = new ObjectStat("Potion", Stats.PV, 20);
         potion.useObject(monstre);
         System.out.println("Après Potion: PV=" + monstre.getPtnVie());
 
         System.out.println("\n--- Test Attack Boost (+10 Atk) ---");
-        ObjectStat atkBoost = new ObjectStat("Atk+", StatType.ATTACK, 10);
+        ObjectStat atkBoost = new ObjectStat("Atk+", Stats.ATTACK, 10);
         atkBoost.useObject(monstre);
         System.out.println("Après Boost: Atk=" + monstre.getAttack());
 

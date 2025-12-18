@@ -1,5 +1,5 @@
 package Monstres;
 
-public enum StatType {
+public enum Stats {
     PV, ATTACK, ATTACK_SPE, DEFENSE, DEFENSE_SPE, SPEED
 }
