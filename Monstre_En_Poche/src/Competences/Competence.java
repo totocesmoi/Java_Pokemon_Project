@@ -1,6 +1,4 @@
 package Competences;
-import java.io.*;
-
 
 public class Competence {
     private String name;
@@ -10,95 +8,32 @@ public class Competence {
     private Integer attackSpe = 0;
     private Integer accuracy = 100;
 
-    public void parser () {
-        try {
-            StringBuilder sb = new StringBuilder();
-            BufferedReader br = new BufferedReader(new FileReader("./Competences/Data.txt"));
-            String line = br.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
-            }
-
-            br.close();
-
-            String[] data = sb.toString().replace("Attack\n", "").trim().split("End");
-            for (String competence : data) { // Analyse des lignes de la competence
-                String category = ""; // Pour la categorie de l'attaque (Spéciale ou Physique)
-                Integer power = 0; // Pour la puissance de l'attaque
-                
-                // Parse les stats de la competence
-                for (String caracteristique : competence.split("\\R")) { // Analyse des lignes de la competence
-                    String stat = caracteristique.split(" ", 2)[0]; // La statistique qui va etre modifié
-                    String value = caracteristique.replace(stat + " ", ""); // La valeur de la statistique
-
-                    System.out.println("Stat : " + stat + ", Value : " + value);
-
-                    switch (stat) {
-                        case "Name":
-                            this.name = value;
-                            break;
-                        case "Type":
-                            this.type = value;
-                            break;
-                        case "Categorie":
-                            category = value;
-                            break;
-                        case "Power":
-                            power = Integer.parseInt(value);
-                            break;
-                        case "NbUse":
-                            this.pp = Integer.parseInt(value);
-                            break;
-                        case "Accuracy":
-                            this.accuracy = Integer.parseInt(value);
-                            break;
-                    
-                        default:
-                            break;
-                    }
-
-                }
-                System.out.println("Categorie : " + category + ", Power : " + power);
-                if (category.equals("Spe")) { // Si c'est vrai c'est une attaque speciale
-                    this.attackSpe = power;
-                }
-                else if (category.equals("Phy")) {
-                    this.attack = power;
-                }
-
-                System.out.println("Atk : " + this.attack + ", AtkSpe : " + this.attackSpe);
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            // throw e;
-        }
+    public void setName (String value) {
+        this.name = value;
     }
 
-    public String getName () {
-        return this.name;
+    public void setType (String value) {
+        this.type = value;
     }
 
-    public String getType () {
-        return this.type;
+    public void setPP (Integer value) {
+        this.pp = value;
     }
 
-    public Integer getPP () {
-        return this.pp;
+    public void setAttack (Integer value) {
+        this.attack = value;
     }
 
-    public Integer getAttack () {
-        return this.attack;
+    public void setAttackSpe (Integer value) {
+        this.attackSpe = value;
     }
 
-    public Integer getAttackSpe () {
-        return this.attackSpe;
+    public void setAccuracy (Integer value) {
+        this.accuracy = value;
     }
 
-    public Integer getAccuracy () {
-        return this.accuracy;
+    @Override
+    public String toString() {
+        return "Name=" + this.name + "\nType=" + this.type + "\nPP=" + this.pp + "\nAttack=" + this.attack + "\nAttackSpe=" + this.attackSpe + "\nAccuracy=" + this.accuracy; 
     }
 }
