@@ -1,6 +1,6 @@
 package Monstres;
 
-import Parser.IParser;
+import Shared.IParser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

@@ -7,6 +7,7 @@ public class Monstre {
     private String name;
     private String type;
     private String category;
+    private Status status;
     private int ptnVie;
     private int attack;
     private int attackSpe;
@@ -20,6 +21,7 @@ public class Monstre {
                    int defense, int defenseSpe, int speed, ArrayList<Competence> competences) {
         this.name = name;
         this.type = type;
+        this.status = null;
         this.category = category;
         this.ptnVie = ptnVie;
         this.attack = attack;
@@ -33,57 +35,64 @@ public class Monstre {
     public int getPtnVie() {
         return ptnVie;
     }
-    private void setPtnVie(int ptnVie) {
+    public void setPtnVie(int ptnVie) {
         this.ptnVie = ptnVie;
     }
 
     public int getAttack() {
         return attack;
     }
-    private void setAttack(int attack) {
+    public void setAttack(int attack) {
         this.attack = attack;
     }
 
     public int getAttackSpe() {
         return attackSpe;
     }
-    private void setAttackSpe(int attackSpe) {
+    public void setAttackSpe(int attackSpe) {
         this.attackSpe = attackSpe;
     }
 
     public int getDefense() {
         return defense;
     }
-    private void setDefense(int defense) {
+    public void setDefense(int defense) {
         this.defense = defense;
     }
 
     public int getDefenseSpe() {
         return defenseSpe;
     }
-    private void setDefenseSpe(int defenseSpe) {
+    public void setDefenseSpe(int defenseSpe) {
         this.defenseSpe = defenseSpe;
     }
 
     public int getSpeed() {
         return speed;
     }
-    private void setSpeed(int speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 
     public String getName() {
         return name;
     }
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
     public String getCategory() {
         return category;
     }
-    private void setCategory(String category) {
+    public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public String getType() {
@@ -104,8 +113,9 @@ public class Monstre {
     public String toString() {
         return "Monstre{" +
                 "name='" + name + '\'' +
-                "type='" + type + '\'' +
-                "category='" + category + '\'' +
+                ", type='" + type + '\'' +
+                ", category='" + category + '\'' +
+                ", status='" + status.toString() + '\'' +
                 ", ptnVie=" + ptnVie +
                 ", attack=" + attack +
                 ", attackSpe=" + attackSpe +
