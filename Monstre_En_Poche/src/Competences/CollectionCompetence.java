@@ -1,11 +1,13 @@
 package Competences;
 
+import Shared.IParser;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CollectionCompetence {
+public class CollectionCompetence implements IParser {
     
     public ArrayList<Competence> competences;
     
@@ -13,10 +15,10 @@ public class CollectionCompetence {
         this.competences = new ArrayList<>();
     }
 
-    public void parser () {
+    public void load(String path) {
         StringBuilder sb = new StringBuilder();
         try {
-            BufferedReader br = new BufferedReader(new FileReader("./Competences/Competences.txt"));
+            BufferedReader br = new BufferedReader(new FileReader(path));
             String line = br.readLine();
 
             while (line != null) {
@@ -32,7 +34,7 @@ public class CollectionCompetence {
             e.printStackTrace();
         }
 
-        String[] data = sb.toString().replace("Attack\n", "").trim().split("End");
+        String[] data = sb.toString().replaceAll("Attack\\R", "").trim().split("End");
         for (String competenceStr : data) { // Analyse des lignes de la competence
             Competence competence = new Competence();
             String category = ""; // Pour la categorie de l'attaque (Spéciale ou Physique)

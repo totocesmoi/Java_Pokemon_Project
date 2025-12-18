@@ -1,13 +1,19 @@
-import Competences.*;
+import Tests.*;
+
 // javac ./Main.java && java Main
 public class Main {
     public static void main(String[] args) {
-        Tests.TestsMonstre tests = new Tests.TestsMonstre();
+        TestsMonstre tests = new TestsMonstre();
         tests.testChargementMonstres();
 
+        TestsCompetence testsCompetence = new TestsCompetence();
+        testsCompetence.testChargementCompetence();
+
+        /*
         System.out.println("\n--------------------------------------------------\n");
 
-        Tests.TestsObjects testsObjects = new Tests.TestsObjects();
+        TestsObjects testsObjects = new TestsObjects();
         testsObjects.testObjets();
+        */
     }
 }

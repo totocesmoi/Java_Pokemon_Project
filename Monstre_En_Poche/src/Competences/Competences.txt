@@ -6,6 +6,7 @@ Power 40
 NbUse 25
 Accuracy 100
 EndAttack
+
 Attack
 Name Hydrocanon
 Type Eau
@@ -14,6 +15,7 @@ Power 110
 NbUse 5
 Accuracy 80
 EndAttack
+
 Attack
 Name Pistolet a Eau
 Type Eau
