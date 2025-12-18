@@ -1,5 +1,5 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import Competences.*;
+// javac ./Main.java && java Main
 public class Main {
     public static void main(String[] args) {
         Tests.TestsMonstre tests = new Tests.TestsMonstre();
