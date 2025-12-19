@@ -1,7 +1,7 @@
 package Objets;
 
 import Monstres.Monstre;
-import Monstres.Stats;
+import Monstres.Enum.Stats;
 
 public class ObjectStat extends Object {
     private Stats stats;

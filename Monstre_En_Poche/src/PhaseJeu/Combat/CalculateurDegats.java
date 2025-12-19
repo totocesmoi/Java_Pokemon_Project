@@ -1,7 +1,7 @@
 package PhaseJeu.Combat;
 
 import Competences.Competence;
-import Competences.Types;
+import Competences.Enum.Types;
 import Monstres.Monstre;
 
 import java.util.concurrent.ThreadLocalRandom;

@@ -1,4 +1,4 @@
-package Competences;
+package Competences.Enum;
 
 public enum Types {
     Eau,

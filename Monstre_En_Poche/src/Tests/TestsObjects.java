@@ -1,8 +1,8 @@
 package Tests;
 
 import Monstres.Monstre;
-import Monstres.Status;
-import Monstres.Stats;
+import Monstres.Enum.Status;
+import Monstres.Enum.Stats;
 import Objets.ObjectStat;
 import Objets.ObjectStatus;
 import java.util.ArrayList;

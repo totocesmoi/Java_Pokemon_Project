@@ -1,7 +1,7 @@
 package Objets;
 
 import Monstres.Monstre;
-import Monstres.Status;
+import Monstres.Enum.Status;
 
 public class ObjectStatus extends Object{
     private Status statusSoigne;

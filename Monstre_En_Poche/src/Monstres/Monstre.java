@@ -1,6 +1,7 @@
 package Monstres;
 
 import Competences.Competence;
+import Monstres.Enum.Status;
 import PhaseJeu.Combat.CalculateurDegats;
 import java.util.ArrayList;
 
