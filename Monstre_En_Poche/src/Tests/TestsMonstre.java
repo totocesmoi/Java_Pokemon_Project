@@ -4,7 +4,15 @@ import Monstres.CollectionMonstres;
 import Monstres.MonstreVM;
 
 public class TestsMonstre {
-    public void testChargementMonstres() {
+    public static void main(String[] args) {
+        System.out.println("=== DEBUT DES TESTS JEU ===");
+
+        testChargementMonstres();
+
+        System.out.println("=== FIN DES TESTS ===");
+    }
+
+    public static void testChargementMonstres() {
         System.out.println("Début du test de chargement des monstres...");
         
         CollectionMonstres collection = new CollectionMonstres();

@@ -5,5 +5,6 @@ public enum Types {
     Feu,
     Terre,
     Foudre,
-    Nature
+    Nature,
+    Normal
 }

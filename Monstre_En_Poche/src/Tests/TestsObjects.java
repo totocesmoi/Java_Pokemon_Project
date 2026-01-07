@@ -8,7 +8,15 @@ import Objets.ObjectStatus;
 import java.util.ArrayList;
 
 public class TestsObjects {
-    public void testObjets() {
+    public static void main(String[] args) {
+        System.out.println("=== DEBUT DES TESTS JEU ===");
+
+        testObjets();
+
+        System.out.println("=== FIN DES TESTS ===");
+    }
+
+    public static void testObjets() {
         System.out.println("Début des tests des objets...");
 
         Monstre monstre = new Monstre("TestMonstre", "Normal", "Test", 100, 50, 50, 50, 50, 50, new ArrayList<>());

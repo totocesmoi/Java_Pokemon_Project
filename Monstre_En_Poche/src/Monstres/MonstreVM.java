@@ -40,6 +40,23 @@ public class MonstreVM {
     public MonstreVM() {
     }
 
+    // Getters
+    public String getName() { return name; }
+    public String getType() { return type; }
+    public String getCategory() { return category; }
+    public int getHpMin() { return hpMin; }
+    public int getHpMax() { return hpMax; }
+    public int getAttackMin() { return attackMin; }
+    public int getAttackMax() { return attackMax; }
+    public int getAttackSpeMin() { return attackSpeMin; }
+    public int getAttackSpeMax() { return attackSpeMax; }
+    public int getDefenseMin() { return defenseMin; }
+    public int getDefenseMax() { return defenseMax; }
+    public int getDefenseSpeMin() { return defenseSpeMin; }
+    public int getDefenseSpeMax() { return defenseSpeMax; }
+    public int getSpeedMin() { return speedMin; }
+    public int getSpeedMax() { return speedMax; }
+
     public void setName(String name) {
         this.name = name;
     }
