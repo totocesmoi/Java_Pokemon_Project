@@ -9,6 +9,8 @@ public class Extension {
             case "Plante" -> Types.PLANTE;
             case "Insecte" -> Types.INSECTE;
             case "Foudre" -> Types.FOUDRE;
+            case "Terre" -> Types.TERRE;
+            case "Normal" -> Types.NORMAL;
             default -> null;
         };
     }

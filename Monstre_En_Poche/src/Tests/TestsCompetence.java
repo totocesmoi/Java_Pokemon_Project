@@ -17,7 +17,8 @@ public class TestsCompetence {
         System.out.println("Début du test de chargement des compétences...");
 
         CollectionCompetence collection = new CollectionCompetence();
-        collection.load("./Competences/Competences.txt");
+        // Correction du chemin relatif pour pointer vers src
+        collection.load("src/Competences/Competences.txt");
 
         if (collection.competences != null) {
             System.out.println("Nombre de compétences chargés : " + collection.competences.size());

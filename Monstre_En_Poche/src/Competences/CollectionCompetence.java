@@ -50,8 +50,8 @@ public class CollectionCompetence implements IParser {
                         competence.setName(value);
                         break;
                     case "Type":
-                        Types toto = Extension.setType(value);
-                        competence.setType(toto);
+                        Types type = Extension.setType(value);
+                        competence.setType(type);
                         break;
                     case "Category": // Status / Physique / Special
                         competence.setCategory(value);
