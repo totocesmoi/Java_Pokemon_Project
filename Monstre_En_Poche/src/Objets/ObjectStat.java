@@ -42,4 +42,9 @@ public class ObjectStat extends Object {
                 break;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Name=" + name + " (Type=Stat)\nStat=" + stats + "\nValue=" + value;
+    }
 }

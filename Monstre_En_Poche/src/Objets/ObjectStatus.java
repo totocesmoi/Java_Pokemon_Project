@@ -20,4 +20,9 @@ public class ObjectStatus extends Object {
             System.out.println("Cela n'a aucun effet sur " + monstre.getName());
         }
     }
+
+    @Override
+    public String toString() {
+        return "Name=" + name + " (Type=Status)\nEffect=" + statusSoigne;
+    }
 }

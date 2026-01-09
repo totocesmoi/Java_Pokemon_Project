@@ -1,0 +1,60 @@
+Object
+Name Potion
+Type Stat
+Stat HP
+Value 30
+EndObject
+
+Object
+Name SuperPotion
+Type Stat
+Stat HP
+Value 60
+EndObject
+
+Object
+Name Attaque+
+Type Stat
+Stat Attack
+Value 10
+EndObject
+
+Object
+Name AttaqueSpe+
+Type Stat
+Stat AttackSpe
+Value 10
+EndObject
+
+Object
+Name Defense+
+Type Stat
+Stat Defense
+Value 10
+EndObject
+
+Object
+Name DefenseSpe+
+Type Stat
+Stat DefenseSpe
+Value 10
+EndObject
+
+Object
+Name Vitesse+
+Type Stat
+Stat Speed
+Value 10
+EndObject
+
+Object
+Name Anti-Brule
+Type Status
+Effect Burned
+EndObject
+
+Object
+Name Anti-Para
+Type Status
+Effect Paralyze
+EndObject
