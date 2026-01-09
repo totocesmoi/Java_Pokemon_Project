@@ -1,4 +1,4 @@
-package Monstres;
+package Monstres.Enum;
 
 public enum Status {
     NONE,

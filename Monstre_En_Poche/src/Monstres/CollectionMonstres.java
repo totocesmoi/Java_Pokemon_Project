@@ -41,13 +41,19 @@ public class CollectionMonstres implements IParser {
                         String key = parts[0];
                         switch (key) {
                             case "Name":
-                                if (parts.length > 1) currentMonstre.setName(parts[1]);
+                                if (parts.length > 1) {
+                                    currentMonstre.setName(parts[1]);
+                                }
                                 break;
                             case "Type":
-                                if (parts.length > 1) currentMonstre.setType(parts[1]);
+                                if (parts.length > 1) {
+                                    currentMonstre.setType(parts[1]);
+                                }
                                 break;
                             case "Category":
-                                if (parts.length > 1) currentMonstre.setCategory(parts[1]);
+                                if (parts.length > 1) {
+                                    currentMonstre.setCategory(parts[1]);
+                                }
                                 break;
                             case "HP":
                                 if (parts.length > 2) {

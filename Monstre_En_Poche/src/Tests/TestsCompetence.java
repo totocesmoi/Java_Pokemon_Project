@@ -6,7 +6,16 @@ import Monstres.CollectionMonstres;
 import Monstres.MonstreVM;
 
 public class TestsCompetence {
-    public void testChargementCompetence() {
+    public static void main(String[] args) {
+        System.out.println("=== DEBUT DES TESTS JEU ===");
+
+        testChargementCompetence();
+
+        System.out.println("=== FIN DES TESTS ===");
+    }
+
+
+    public static void testChargementCompetence() {
         System.out.println("Début du test de chargement des compétences...");
 
         CollectionCompetence collection = new CollectionCompetence();

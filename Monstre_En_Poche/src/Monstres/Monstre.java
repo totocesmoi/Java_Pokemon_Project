@@ -1,6 +1,8 @@
 package Monstres;
 
 import Competences.Competence;
+import Monstres.Enum.Status;
+import PhaseJeu.Combat.CalculateurDegats;
 import java.util.ArrayList;
 
 public class Monstre {
@@ -93,6 +95,59 @@ public class Monstre {
     }
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    /**
+     * @brief : Méthode allow to attack other monster
+     * @param target : monster target
+     * @param competence : skill use to attack the monster
+     */
+    public void attackMonster(Monstre target, Competence competence) {
+        System.out.println(this.name + " use " + competence.getName() + " on " + target.getName() + " !");
+        
+        int degats = CalculateurDegats.calculerDegats(this, target, competence);
+        
+        target.receivedDamage(degats);
+    }
+
+    public boolean peutApprendre(Competence c) {
+        if (competences.size() >= 4) {
+            System.out.println("Le monstre a deja 4 competences.");
+            return false;
+        } 
+        if (!c.getType().equalsIgnoreCase("Normal") && !c.getType().equalsIgnoreCase(this.type)) {
+            System.out.println("Type incompatible (Monstre: " + type + ", Competence: " + c.getType() + ")");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean ajouterCompetence(Competence c) {
+        if (peutApprendre(c)) {
+            competences.add(c);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @brief : Allow to receive any damage for the current monster
+     * @param damage : number indicate how many damages, the monster received
+     */
+    public void receivedDamage(int damage) {
+        this.ptnVie -= damage;
+        if (this.ptnVie < 0) {
+            this.ptnVie = 0;
+        }
+        System.out.println(this.name + " received " + damage + " damage. Current HP : " + this.ptnVie);
+        
+        if (this.isKO()) {
+            System.out.println(this.name + " is K.O. !");
+        }
+    }
+
+    public boolean isKO() {
+        return this.ptnVie <= 0;
     }
 
     public String getType() {
