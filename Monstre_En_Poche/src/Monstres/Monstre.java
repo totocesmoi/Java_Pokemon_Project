@@ -147,7 +147,7 @@ public class Monstre {
         if (this.ptnVie < 0) {
             this.ptnVie = 0;
         }
-        System.out.print(this.name + " received " + damage + " damage. Current HP : " + this.ptnVie);
+        System.out.println(this.name + " received " + damage + " damage. Current HP : " + this.ptnVie);
         
         if (this.isKO()) {
             System.out.println(this.name + " is K.O. !");

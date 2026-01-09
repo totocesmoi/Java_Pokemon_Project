@@ -49,7 +49,13 @@ public class PhaseCombat {
                 return new SwitchAction(player1, monstreChoisi);
             case "3":
                 // Utiliser un objet
-                return null;
+                System.out.println("Objets disponibles :");
+                for (int i = 0; i < player1.getBag().size(); i++) {
+                    System.out.println((i + 1) + ". " + player1.getBag().get(i).getName());
+                }
+                System.out.print("Choisissez un objet : ");
+                int objetChoisi = Integer.parseInt(scanner.nextLine()) - 1;
+                return new ItemAction(player1, objetChoisi);
             case "4":
                 // Declarer forfait
                 System.out.println(player1.getName() + " a declare forfait. " + player2.getName() + " gagne le combat !");
@@ -57,6 +63,43 @@ public class PhaseCombat {
                 return null;
             default:
                 return null;
+        }
+    }
+
+    public void checkInteruption (Scanner scanner) {
+        if (player1.isDefeated()) {
+            System.out.println(player1.getName() + " n'a plus de monstres en vie. " + player2.getName() + " gagne le combat !");
+            System.exit(0);
+        }
+        if (player2.isDefeated()) {
+            System.out.println(player2.getName() + " n'a plus de monstres en vie. " + player1.getName() + " gagne le combat !");
+            System.exit(0);
+        }
+
+        if (player1.getActifMonster().isKO()) {
+            System.out.println(player1.getName() + ", choisissez un nouveau monstre :");
+            for (int i = 0; i < player1.getTeam().size(); i++) {
+                if (player1.getTeam().get(i).isKO()) {
+                    continue;
+                }
+                System.out.println((i + 1) + ". " + player1.getTeam().get(i).getName());
+            }
+            System.out.print("Choisissez un monstre : ");
+            int monstreChoisi = Integer.parseInt(scanner.nextLine()) - 1;
+            player1.changeMonster(monstreChoisi);
+        }
+        
+        if (player2.getActifMonster().isKO()) {
+            System.out.println(player2.getName() + ", choisissez un nouveau monstre :");
+            for (int i = 0; i < player2.getTeam().size(); i++) {
+                if (player2.getTeam().get(i).isKO()) {
+                    continue;
+                }
+                System.out.println((i + 1) + ". " + player2.getTeam().get(i).getName());
+            }
+            System.out.print("Choisissez un monstre : ");
+            int monstreChoisi = Integer.parseInt(scanner.nextLine()) - 1;
+            player2.changeMonster(monstreChoisi);
         }
     }
 
@@ -79,21 +122,7 @@ public class PhaseCombat {
 
         while (true) {
             // Si un des joueurs n'a plus de monstres en vie, l'autre joueur gagne
-            for (int i = 0; i < player1.getTeam().size(); i++) {
-                if (player1.getTeam().get(i).getPtnVie() > 0) {
-                    // Le monstre peut attaquer
-                } else {
-                    System.out.println(player1.getTeam().get(i).getName() + " est KO !");
-                    return;
-                }
-
-                if (player2.getTeam().get(i).getPtnVie() > 0) {
-                    // Le monstre peut attaquer
-                } else {
-                    System.out.println(player2.getTeam().get(i).getName() + " est KO !");
-                    return;
-                }
-            }
+            checkInteruption(scanner);
 
             turn++;
 

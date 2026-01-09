@@ -109,4 +109,13 @@ public class Joueur {
         }
         return null;
     }
+
+    public boolean isDefeated() {
+        for (Monstre m : team) {
+            if (!m.isKO()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
