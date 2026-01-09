@@ -1,13 +1,11 @@
 package Tests;
 
-
 import Competences.Competence;
 import Joueurs.Joueur;
-import Monstres.Monstre;
 import Monstres.Enum.Stats;
+import Monstres.Monstre;
 import Objets.ObjectStat;
 import Shared.Types;
-
 import java.util.ArrayList;
 
 public class TestJoueur {
@@ -147,6 +145,6 @@ public class TestJoueur {
     }
 
     private static Monstre createDummyMonstre(String name, Types type) {
-        return new Monstre(name, type, "Base", 100, 10, 10, 10, 10, 10, new ArrayList<>());
+        return new Monstre(name, type, 100, 10, 10, 10, 10, 10, new ArrayList<>());
     }
 }
