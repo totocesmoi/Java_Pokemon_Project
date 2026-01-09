@@ -1,10 +1,12 @@
 package Tests;
 
+import Competences.CollectionCompetence;
 import Competences.Competence;
 import Competences.Enum.Categories;
 import Joueurs.IAExpert;
 import Joueurs.IARandom;
 import Joueurs.Joueur;
+import Monstres.CollectionMonstres;
 import Monstres.Monstre;
 import Monstres.MonstreVM;
 import Shared.Effects;
@@ -17,15 +19,27 @@ public class TestJoueurAI {
     public static void main(String[] args) {
         System.out.println("=== DEBUT DES TESTS IA ===");
 
-        // 1. Préparation des données factices (Mocking)
-        List<MonstreVM> mockMonsters = createMockMonsters();
-        List<Competence> mockSkills = createMockSkills();
+        // 1. Chargement des données réelles
+        CollectionMonstres colMonstres = new CollectionMonstres();
+        colMonstres.load("src/Monstres/Monstres.txt");
+        List<MonstreVM> loadedMonsters = colMonstres.monstres;
+
+        CollectionCompetence colCompetences = new CollectionCompetence();
+        colCompetences.load("src/Competences/Competences.txt");
+        List<Competence> loadedSkills = colCompetences.competences;
+
+        if (loadedMonsters == null || loadedMonsters.isEmpty() || loadedSkills == null || loadedSkills.isEmpty()) {
+            System.out.println("Erreur: Impossible de charger les données pour le test.");
+            return;
+        }
+
+        System.out.println("Données chargées : " + loadedMonsters.size() + " monstres, " + loadedSkills.size() + " compétences.");
 
         // 2. Test IARandom
-        testIARandom(mockMonsters, mockSkills);
+        testIARandom(loadedMonsters, loadedSkills);
 
         // 3. Test IAExpert
-        testIAExpert(mockMonsters, mockSkills);
+        testIAExpert(loadedMonsters, loadedSkills);
 
         System.out.println("=== FIN DES TESTS IA ===");
     }
@@ -42,6 +56,7 @@ public class TestJoueurAI {
 
         // Test de prise de décision
         Monstre attaquant = ia.getActifMonster();
+        // Cible pour tester
         Monstre cible = new Monstre("Poutchichou", Types.NORMAL, "Dummy", 100, 10, 10, 10, 10, 10, new ArrayList<>());
         
         System.out.println("Monstre actif IA : " + attaquant.getName() + " (" + attaquant.getType() + ")");
@@ -102,49 +117,5 @@ public class TestJoueurAI {
         if (skillsOk) {
             System.out.println(">> SUCCES: Tous les monstres ont des compétences.");
         }
-    }
-
-    // --- Helpers pour créer des données de test ---
-
-    private static List<MonstreVM> createMockMonsters() {
-        List<MonstreVM> list = new ArrayList<>();
-        // Basé sur Monstres.txt
-        
-        // Pikachu (Electric -> FOUDRE)
-        list.add(new MonstreVM("Pikachu", Types.FOUDRE, "Special", 110, 141, 75, 106, 75, 106, 50, 82, 50, 82, 110, 141));
-        
-        // Bulbizarre (Plante -> PLANTE)
-        list.add(new MonstreVM("Bulbizarre", Types.PLANTE, "Physique", 45, 60, 49, 65, 49, 65, 49, 65, 49, 65, 45, 60));
-        
-        return list;
-    }
-
-    private static List<Competence> createMockSkills() {
-        List<Competence> list = new ArrayList<>();
-        // Basé sur Competences.txt
-
-        // Flammeche: FEU, Spe, 40, Acc 100, PP 25, Effect Burned, Rate 50
-        list.add(createSkill("Flammeche", Types.FEU, 40, Categories.SPECIAL, 25, 100, Effects.BURNED, 50));
-
-        // Hydrocanon: EAU, Spe, 110, Acc 80, PP 5
-        list.add(createSkill("Hydrocanon", Types.EAU, 110, Categories.SPECIAL, 5, 80, Effects.NONE, 0));
-
-        // Pistolet a Eau: EAU, Spe, 30, Acc 100, PP 30
-        list.add(createSkill("Pistolet a Eau", Types.EAU, 30, Categories.SPECIAL, 30, 100, Effects.NONE, 0));
-
-        return list;
-    }
-
-    private static Competence createSkill(String name, Types type, int power, Categories cat, int pp, int accuracy, Effects effect, int rate) {
-        Competence c = new Competence();
-        c.setName(name);
-        c.setType(type);
-        c.setPower(power);
-        c.setCategory(cat);
-        c.setAccuracy(accuracy);
-        c.setPP(pp);
-        c.setEffect(effect);
-        c.setEffectRate(rate);
-        return c;
     }
 }
