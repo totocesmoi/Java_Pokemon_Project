@@ -1,6 +1,5 @@
 Monster
 Name Pikachu
-Category Special
 Type Electric
 HP 110 141
 Speed 110 141
@@ -11,7 +10,6 @@ EndMonster
 Monster
 Name Bulbizarre
 Type Plante
-Category Physique
 HP 45 60
 Speed 45 60
 Attack 49 65

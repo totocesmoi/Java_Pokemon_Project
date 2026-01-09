@@ -5,9 +5,10 @@ public class Extension {
         return switch (value) {
             case "Feu" -> Types.FEU;
             case "Eau" -> Types.EAU;
-            case "Nature" -> Types.NATURE;
+            case "Nature" -> Types.PLANTE;
+            case "Plante" -> Types.PLANTE;
+            case "Insecte" -> Types.INSECTE;
             case "Foudre" -> Types.FOUDRE;
-            case "Terre" -> Types.TERRE;
             default -> null;
         };
     }

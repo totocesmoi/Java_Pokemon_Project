@@ -1,9 +1,9 @@
 package PhaseJeu.Combat;
 
-import Shared.*;
 import Competences.Competence;
 import Competences.Enum.Categories;
 import Monstres.Monstre;
+import Shared.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CalculateurDegats {
@@ -61,6 +61,16 @@ public class CalculateurDegats {
         return new Pair<>(damages, effect);
     }
 
+    private static final double[][] efficiency = {
+        // DEF: EAU(1), FEU(2), FOUDRE(3), NATURE(4), NORMAL(5)
+        /* VIDE */    {1.0, 1.0, 1.0, 1.0, 1.0, 1.0},
+        /* ATK EAU */ {1.0, 2.0, 0.5, 1.0, 1.0, 1.0},
+        /* ATK FEU */ {0.5, 1.0, 1.0, 2.0, 1.0, 1.0},
+        /* ATK FOU */ {2.0, 1.0, 1.0, 1.0, 1.0, 1.0},
+        /* ATK NAT */ {1.0, 0.5, 1.0, 1.0, 1.0, 1.0},
+        /* ATK NOR */ {1.0, 1.0, 1.0, 1.0, 1.0, 1.0}
+    };
+
     /**
      * @brief Allow to calculate the advantage in depend on type of skill and type of monster target
      * @param skill : Competence use
@@ -68,63 +78,6 @@ public class CalculateurDegats {
      * @return number of advantage.
      */
     public static double avantage(Competence skill, Monstre target) {
-        // Gestion du type eau
-        if (skill.getType().equals(Types.EAU)) {
-            if (target.getType().equals(Types.FEU)) {
-                return 2;
-            }
-            if (target.getType().equals(Types.FOUDRE)) {
-                return 0.5;
-            }
-            return 1;
-        }
-
-        // Gestion du type feu
-        if (skill.getType().equals(Types.FEU)) {
-            if (target.getType().equals(Types.NATURE)) {
-                return 2;
-            }
-            if (target.getType().equals(Types.EAU)) {
-                return 0.5;
-            }
-            return 1;
-        }
-
-        // Gestion du type nature
-        if (skill.getType().equals(Types.NATURE)) {
-            if (target.getType().equals(Types.TERRE)) {
-                return 2;
-            }
-            if (target.getType().equals(Types.FEU)) {
-                return 0.5;
-            }
-            return 1;
-        }
-
-        // Gestion du type terre
-        if (skill.getType().equals(Types.TERRE)) {
-            if (target.getType().equals(Types.FOUDRE)) {
-                return 2;
-            }
-            if (target.getType().equals(Types.NATURE)) {
-                return 0.5;
-            }
-            return 1;
-        }
-
-        // Gestion du type foudre
-        if (skill.getType().equals(Types.FOUDRE)) {
-            if (target.getType().equals(Types.EAU)) {
-                return 2;
-            }
-            if (target.getType().equals(Types.TERRE)) {
-                return 0.5;
-            }
-            return 1;
-        }
-
-        // Par défaut en cas d'erreur on return 1
-        // On ne doit jamais arriver ici (sauf type normal)
-        return 1;
+        return efficiency[skill.getType().getFamilleId()][target.getType().getFamilleId()];
     }
 }

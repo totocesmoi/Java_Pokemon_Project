@@ -18,6 +18,7 @@ public class TestJoueur {
         testLimiteObjets();
         testValiditeCompetences();
         afficherEquipeTest();
+        testAffichageTroisMonstres(); // Nouveau test
         
         System.out.println("=== FIN DES TESTS ===");
     }
@@ -32,7 +33,7 @@ public class TestJoueur {
         // Création de 4 monstres bidons
         Monstre m1 = createDummyMonstre("M1", Types.FEU);
         Monstre m2 = createDummyMonstre("M2", Types.EAU);
-        Monstre m3 = createDummyMonstre("M3", Types.NATURE);
+        Monstre m3 = createDummyMonstre("M3", Types.PLANTE);
         Monstre m4 = createDummyMonstre("M4", Types.FEU);
 
         System.out.println("Ajout M1: " + j.addMonster(m1));
@@ -127,9 +128,9 @@ public class TestJoueur {
     public static void afficherEquipeTest() {
         System.out.println("\n--- Test Affichage Équipe ---");
         Joueur j = new Joueur("Pierre");
-        Monstre m = createDummyMonstre("Onix", Types.NATURE);
+        Monstre m = createDummyMonstre("Onix", Types.NORMAL);
         
-        Competence c = new Competence(); c.setName("Jet-Pierres"); c.setType(Types.NATURE);
+        Competence c = new Competence(); c.setName("Charge"); c.setType(Types.NORMAL);
         m.ajouterCompetence(c);
         
         j.addMonster(m);
@@ -143,6 +144,45 @@ public class TestJoueur {
                 System.out.print(comp.getName() + " ");
             }
             System.out.println();
+        }
+    }
+
+    /*
+     * Test 5: Test supplémentaire avec 3 monstres
+     */
+    public static void testAffichageTroisMonstres() {
+        System.out.println("\n--- Test Affichage 3 Monstres (Max Compétences) ---");
+        Joueur j = new Joueur("Red");
+        
+        Monstre m1 = createDummyMonstre("Dracaufeu", Types.FEU);
+        Monstre m2 = createDummyMonstre("Tortank", Types.EAU);
+        Monstre m3 = createDummyMonstre("Florizarre", Types.PLANTE);
+        
+        fillCompetences(m1);
+        fillCompetences(m2);
+        fillCompetences(m3);
+
+        j.addMonster(m1);
+        j.addMonster(m2);
+        j.addMonster(m3);
+        
+        System.out.println("Joueur: " + j.getName() + " possède " + j.getTeam().size() + " monstres.");
+        for(Monstre monstre : j.getTeam()) {
+            System.out.println("- " + monstre.getName() + " [" + monstre.getType() + "]");
+            System.out.print("  > Attaques: ");
+            for(Competence c : monstre.getCompetences()) {
+                System.out.print(c.getName() + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    private static void fillCompetences(Monstre m) {
+        for(int i=1; i<=4; i++) {
+            Competence c = new Competence();
+            c.setName("Atk" + i);
+            c.setType(m.getType());
+            m.ajouterCompetence(c);
         }
     }
 
