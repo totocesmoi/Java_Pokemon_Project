@@ -1,5 +1,5 @@
 import Competences.CollectionCompetence;
-import Joueurs.Joueur;
+import Joueurs.*;
 import Monstres.CollectionMonstres;
 import PhaseJeu.Combat.ManageCombat;
 import PhaseJeu.Combat.PhaseCombat;
@@ -86,9 +86,16 @@ public class Main {
                     PhaseCombat combat;
                     System.out.println("Launching game in " + combatManager.gameMode + " mode... " + combatManager.playersInCombat.size() + " players selected.");
                     if (combatManager.gameMode.equals( "PVE") && combatManager.playersInCombat.size() == 1) {
+                        Joueur iaPlayer;
+                        if (combatManager.iaType.equals("Expert")) {
+                            iaPlayer = new IAExpert("Bot Expert", collectionMonstres.monstres, collectionCompetence.competences);
+                        } else {
+                            iaPlayer = new IARandom("Bot Random", collectionMonstres.monstres, collectionCompetence.competences);
+                        }
+
                         combat = new PhaseCombat(
                             combatManager.playersInCombat.get(0),
-                            combatManager.playersInCombat.get(0) // IA
+                            iaPlayer
                         );
                         combat.combat();
                         break;

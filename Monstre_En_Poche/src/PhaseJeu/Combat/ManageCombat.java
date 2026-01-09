@@ -10,6 +10,7 @@ public class ManageCombat {
     private Scanner scanner;
     public List<Joueur> playersInCombat;
     public String gameMode = "PVE"; // PVE or PVP
+    public String iaType = "Random"; // Random or Expert
 
     public ManageCombat() {
         this.scanner = new Scanner(System.in);
@@ -41,6 +42,15 @@ public class ManageCombat {
         switch (choix) {
             case "1":
                 this.gameMode = "PVE";
+                
+                printSeparator();
+                System.out.println(ANSI_BOLD + "         Choose AI Difficulty" + ANSI_RESET);
+                System.out.println("1. Random (Easy)");
+                System.out.println("2. Expert (Hard)");
+                System.out.print(ANSI_UNDERLINE + "Choice :" + ANSI_RESET + " ");
+                int iaChoice = ReadInt.readInt(scanner, 1, 2);
+                this.iaType = (iaChoice == 1) ? "Random" : "Expert";
+
                 System.out.println("Which player will you play ?");
 
                 for (int i = 0; i < players.size(); i++) {
@@ -50,8 +60,7 @@ public class ManageCombat {
                 int choice = ReadInt.readInt(scanner, 1, players.size()) - 1;
                 Joueur p1 = players.get(choice);
                 this.playersInCombat.add(p1);
-                System.out.println(p1.getName() + " will face the IA. " + playersInCombat.size());
-                // playersInCombat.add(players.get(Integer.parseInt(scanner.nextLine()) - 1));
+                System.out.println(p1.getName() + " will face the " + this.iaType + " IA.");
                 break;
             case "2":
                 this.gameMode = "PVP";

@@ -1,10 +1,12 @@
 package PhaseJeu.Combat;
+import Competences.Competence;
+import Joueurs.IA;
 import Joueurs.Joueur;
 import Monstres.Monstre;
-import java.util.Scanner;
+import Shared.ReadInt;
 import java.util.HashMap;
 import java.util.Map;
-import Shared.ReadInt;
+import java.util.Scanner;
 
 public class PhaseCombat {
     int turn;
@@ -18,6 +20,18 @@ public class PhaseCombat {
     }
 
     private IAction selectAction(Joueur player1, Joueur player2, Scanner scanner) {
+        // AI Logic
+        if (player1 instanceof IA) {
+            // System.out.println(player1.getName() + " (IA) is choosing move...");
+            try {
+                Thread.sleep(1000); // Petit délai pour le réalisme
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Competence c = ((IA) player1).choisirCompetence(player2.getActifMonster());
+            return new AttackAction(player1.getActifMonster(), player2, c);
+        }
+
         System.out.println(player1.getName() + ", choisissez une action pour " + player1.getActifMonster().getName() + " :");
         System.out.println("1. Attaquer");
         System.out.println("2. Changer de monstre");
@@ -79,6 +93,35 @@ public class PhaseCombat {
         }
     }
 
+    private void handleKOSwitch(Joueur player, Scanner scanner) {
+        if (!player.getActifMonster().isKO()) return;
+
+        if (player instanceof IA) {
+            for(int i=0; i<player.getTeam().size(); i++) {
+                if (!player.getTeam().get(i).isKO()) {
+                    player.changeMonster(i);
+                    return;
+                }
+            }
+        }
+        
+        System.out.println(player.getName() + ", choisissez un nouveau monstre :");
+        for (int i = 0; i < player.getTeam().size(); i++) {
+           if (player.getTeam().get(i).isKO()) {
+               continue;
+           }
+           System.out.println((i + 1) + ". " + player.getTeam().get(i).getName());
+       }
+       System.out.print("Choisissez un monstre : ");
+       int monstreChoisi;
+       while (true) {
+           monstreChoisi = ReadInt.readInt(scanner, 1, player.getTeam().size()) - 1;
+           if (!player.getTeam().get(monstreChoisi).isKO()) break;
+           System.out.println("Monstre KO, choisissez-en un autre.");
+       }
+       player.changeMonster(monstreChoisi);
+   }
+
     public void checkInteruption (Scanner scanner) {
         if (player1.isDefeated()) {
             System.out.println(player1.getName() + " n'a plus de monstres en vie. " + player2.getName() + " gagne le combat !");
@@ -89,41 +132,8 @@ public class PhaseCombat {
             System.exit(0);
         }
 
-        if (player1.getActifMonster().isKO()) {
-            System.out.println(player1.getName() + ", choisissez un nouveau monstre :");
-            for (int i = 0; i < player1.getTeam().size(); i++) {
-                if (player1.getTeam().get(i).isKO()) {
-                    continue;
-                }
-                System.out.println((i + 1) + ". " + player1.getTeam().get(i).getName());
-            }
-            System.out.print("Choisissez un monstre : ");
-            int monstreChoisi1;
-            while (true) {
-                monstreChoisi1 = ReadInt.readInt(scanner, 1, player1.getTeam().size()) - 1;
-                if (!player1.getTeam().get(monstreChoisi1).isKO()) break;
-                System.out.println("Monstre KO, choisissez-en un autre.");
-            }
-            player1.changeMonster(monstreChoisi1);
-        }
-
-        if (player2.getActifMonster().isKO()) {
-            System.out.println(player2.getName() + ", choisissez un nouveau monstre :");
-            for (int i = 0; i < player2.getTeam().size(); i++) {
-                if (player2.getTeam().get(i).isKO()) {
-                    continue;
-                }
-                System.out.println((i + 1) + ". " + player2.getTeam().get(i).getName());
-            }
-            System.out.print("Choisissez un monstre : ");
-            int monstreChoisi2;
-            while (true) {
-                monstreChoisi2 = ReadInt.readInt(scanner, 1, player2.getTeam().size()) - 1;
-                if (!player2.getTeam().get(monstreChoisi2).isKO()) break;
-                System.out.println("Monstre KO, choisissez-en un autre.");
-            }
-            player2.changeMonster(monstreChoisi2);
-        }
+        handleKOSwitch(player1, scanner);
+        handleKOSwitch(player2, scanner);
     }
 
     // --- Affichage amélioré (ANSI) ---
