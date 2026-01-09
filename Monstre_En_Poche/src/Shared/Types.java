@@ -6,7 +6,8 @@ public enum Types {
     FOUDRE(3),
     PLANTE(4),
     INSECTE(4),
-    NORMAL(5);
+    TERRE(5),
+    NORMAL(6);
 
     private final int familleId;
     Types(int familleId) {
@@ -21,5 +22,6 @@ public enum Types {
     public static final int FAMILLE_FEU = 2;
     public static final int FAMILLE_FOUDRE = 3;
     public static final int FAMILLE_NATURE = 4;
-    public static final int FAMILLE_NORMAL= 5;
+    public static final int FAMILLE_TERRE= 5;
+    public static final int FAMILLE_NORMAL= 6;
 }

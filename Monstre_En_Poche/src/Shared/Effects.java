@@ -1,8 +1,10 @@
 package Shared;
 
 public enum Effects {
-    POISON,
-    FROZEN,
+    PARALYZE,
     BURNED,
-    NONE,
+    FLOODED,
+    RESTORE,
+    HIDDEN,
+    NONE
 }

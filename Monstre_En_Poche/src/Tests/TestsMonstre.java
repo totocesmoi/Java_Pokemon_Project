@@ -1,9 +1,6 @@
 package Tests;
 
-import Competences.CollectionCompetence;
-import Competences.Competence;
 import Monstres.CollectionMonstres;
-import Monstres.Monstre;
 import Monstres.MonstreVM;
 
 public class TestsMonstre {
@@ -21,7 +18,7 @@ public class TestsMonstre {
         CollectionMonstres collection = new CollectionMonstres();
         
         // Le fichier est dans le package Monstres
-        collection.load("./Monstres/Monstres.txt");
+        collection.load("src/Monstres/Monstres.txt");
         
         if (collection.monstres != null) {
             System.out.println("Nombre de monstres chargés : " + collection.monstres.size());

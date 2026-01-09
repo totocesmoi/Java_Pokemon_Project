@@ -12,6 +12,8 @@ EndAttack
 Attack
 Name Hydrocanon
 Type Eau
+Effect Flooded
+EffectRate 30
 Category Spe
 Power 110
 NbUse 5
@@ -22,7 +24,193 @@ Attack
 Name Pistolet a Eau
 Type Eau
 Category Spe
+Effect Flooded
+EffectRate 5
 Power 30
 NbUse 30
 Accuracy 100
+EndAttack
+
+Attack
+Name Tranch'Herbe
+Type Plante
+Category Phy
+Effect None
+Power 55
+NbUse 25
+Accuracy 95
+EndAttack
+
+Attack
+Name Lance-Soleil
+Type Plante
+Category Spe
+Effect Restore
+EffectRate 30
+Power 120
+NbUse 10
+Accuracy 100
+EndAttack
+
+Attack
+Name Charge
+Type Normal
+Category Phy
+Effect None
+Power 40
+NbUse 35
+Accuracy 100
+EndAttack
+
+Attack
+Name Vive-Attaque
+Type Normal
+Category Phy
+Effect None
+Power 40
+NbUse 30
+Accuracy 100
+EndAttack
+
+Attack
+Name Ultralaser
+Type Normal
+Category Spe
+Effect None
+Power 150
+NbUse 5
+Accuracy 90
+EndAttack
+
+Attack
+Name Eclair
+Type Foudre
+Category Spe
+Power 40
+NbUse 30
+Accuracy 100
+EndAttack
+
+Attack
+Name Tonnerre
+Type Foudre
+Category Spe
+Power 90
+NbUse 15
+Accuracy 100
+Effect Paralyze
+EffectRate 10
+EndAttack
+
+Attack
+Name Fatal-Foudre
+Type Foudre
+Category Spe
+Power 110
+NbUse 10
+Accuracy 70
+Effect Paralyze
+EffectRate 30
+EndAttack
+
+Attack
+Name Lance-Flammes
+Type Feu
+Category Spe
+Power 90
+NbUse 15
+Accuracy 100
+Effect Burned
+EffectRate 10
+EndAttack
+
+Attack
+Name Surf
+Type Eau
+Category Spe
+Power 90
+NbUse 15
+Accuracy 100
+Effect Flooded
+EffectRate 35
+EndAttack
+
+Attack
+Name Plaie-Croix
+Type Insecte
+Category Phy
+Power 80
+NbUse 15
+Accuracy 100
+EndAttack
+
+Attack
+Name Dard-Nuee
+Type Insecte
+Category Phy
+Power 25
+NbUse 20
+Accuracy 95
+EndAttack
+
+Attack
+Name Vampirisme
+Type Insecte
+Category Phy
+Power 80
+NbUse 10
+Accuracy 100
+Effect Restore
+EffectRate 100
+EndAttack
+
+Attack
+Name Griffe
+Type Normal
+Category Phy
+Power 40
+NbUse 35
+Accuracy 100
+EndAttack
+
+Attack
+Name Ecrasement
+Type Normal
+Category Phy
+Power 65
+NbUse 20
+Accuracy 100
+EndAttack
+
+Attack
+Name Seisme
+Type Terre
+Category Phy
+Power 100
+NbUse 10
+Accuracy 100
+Effect Hidden
+EffectRate 40
+EndAttack
+
+Attack
+Name Tir de Boue
+Type Terre
+Category Spe
+Power 55
+NbUse 15
+Accuracy 95
+Effect Hidden
+EffectRate 3
+EndAttack
+
+Attack
+Name Ampleur
+Type Terre
+Category Phy
+Power 70
+NbUse 20
+Accuracy 100
+Effect Hidden
+EffectRate 20
 EndAttack

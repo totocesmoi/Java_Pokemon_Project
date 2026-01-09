@@ -1,12 +1,11 @@
 package Tests;
 
-import Monstres.Monstre;
 import Monstres.Enum.Stats;
+import Monstres.Monstre;
 import Objets.ObjectStat;
 import Objets.ObjectStatus;
 import Shared.Effects;
 import Shared.Types;
-
 import java.util.ArrayList;
 
 public class TestsObjects {
@@ -34,19 +33,38 @@ public class TestsObjects {
         atkBoost.useObject(monstre);
         System.out.println("Après Boost: Atk=" + monstre.getAttack());
 
-        System.out.println("\n--- Test Antidote (Soigne Poison) ---");
-        monstre.setStatus(Effects.POISON);
-        System.out.println("Monstre empoisonné: Status=" + monstre.getStatus());
-        
-        ObjectStatus antidote = new ObjectStatus("Antidote", Effects.POISON);
-        antidote.useObject(monstre);
-        System.out.println("Après Antidote: Status=" + monstre.getStatus());
-
-        System.out.println("\n--- Test Antidote sur Brûlure (Ne doit pas marcher) ---");
+        // --- TESTS STATUS ---
+        // 1. Test BURNED (Feu)
+        System.out.println("\n--- Test Soin Brûlure (Feu) ---");
         monstre.setStatus(Effects.BURNED);
-        System.out.println("Monstre brûlé: Status=" + monstre.getStatus());
-        antidote.useObject(monstre);
-        System.out.println("Après Antidote sur Brûlure: Status=" + monstre.getStatus());
+        System.out.println("Status initial: " + monstre.getStatus());
+        
+        ObjectStatus antiBrule = new ObjectStatus("Anti-Brûlure", Effects.BURNED);
+        ObjectStatus antiPara = new ObjectStatus("Anti-Paralysie", Effects.PARALYZE);
+        
+        System.out.println("> Tentative avec Anti-Paralysie (Mauvais objet) :");
+        antiPara.useObject(monstre);
+        System.out.println("Status après mauvais objet: " + monstre.getStatus());
+
+        System.out.println("> Tentative avec Anti-Brûlure (Bon objet) :");
+        antiBrule.useObject(monstre);
+        System.out.println("Status après bon objet: " + monstre.getStatus());
+
+        // 2. Test FLOODED (Eau)
+        System.out.println("\n--- Test Soin Innondation (Eau) ---");
+        monstre.setStatus(Effects.FLOODED);
+        ObjectStatus eponge = new ObjectStatus("Eponge", Effects.FLOODED);
+        System.out.println("Status initial: " + monstre.getStatus());
+        eponge.useObject(monstre);
+        System.out.println("Status après Eponge: " + monstre.getStatus());
+
+        // 3. Test PARALYZE (Foudre)
+        System.out.println("\n--- Test Soin Paralysie (Foudre) ---");
+        monstre.setStatus(Effects.PARALYZE);
+        ObjectStatus cerise = new ObjectStatus("Cerise", Effects.PARALYZE);
+        System.out.println("Status initial: " + monstre.getStatus());
+        cerise.useObject(monstre);
+        System.out.println("Status après Cerise: " + monstre.getStatus());
 
         System.out.println("\nFin des tests des objets.");
     }

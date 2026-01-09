@@ -1,10 +1,12 @@
 Monster
 Name Pikachu
-Type Electric
+Type Foudre
 HP 110 141
 Speed 110 141
 Attack 75 106
 Defense 50 82
+AttackSpe 85 115
+DefenseSpe 50 82
 EndMonster
 
 Monster
@@ -14,4 +16,171 @@ HP 45 60
 Speed 45 60
 Attack 49 65
 Defense 49 65
+AttackSpe 65 80
+DefenseSpe 65 80
+EndMonster
+
+Monster
+Name Salameche
+Type Feu
+HP 39 50
+Speed 65 75
+Attack 52 65
+Defense 43 55
+AttackSpe 60 75
+DefenseSpe 50 60
+EndMonster
+
+Monster
+Name Carapuce
+Type Eau
+HP 44 55
+Speed 43 55
+Attack 48 60
+Defense 65 75
+AttackSpe 50 65
+DefenseSpe 65 80
+EndMonster
+
+Monster
+Name Chenipan
+Type Insecte
+HP 45 55
+Speed 45 55
+Attack 30 40
+Defense 35 45
+AttackSpe 20 30
+DefenseSpe 20 30
+EndMonster
+
+Monster
+Name Aspicot
+Type Insecte
+HP 40 50
+Speed 50 60
+Attack 35 45
+Defense 30 40
+AttackSpe 20 30
+DefenseSpe 20 30
+EndMonster
+
+Monster
+Name Roucool
+Type Normal
+HP 40 50
+Speed 56 66
+Attack 45 55
+Defense 40 50
+AttackSpe 35 45
+DefenseSpe 35 45
+EndMonster
+
+Monster
+Name Rattata
+Type Normal
+HP 30 40
+Speed 72 82
+Attack 56 66
+Defense 35 45
+AttackSpe 25 35
+DefenseSpe 35 45
+EndMonster
+
+Monster
+Name Piafabec
+Type Normal
+HP 40 50
+Speed 70 80
+Attack 60 70
+Defense 30 40
+AttackSpe 30 40
+DefenseSpe 30 40
+EndMonster
+
+Monster
+Name Sabelette
+Type Terre
+HP 50 60
+Speed 40 50
+Attack 75 85
+Defense 85 95
+AttackSpe 20 30
+DefenseSpe 30 40
+EndMonster
+
+Monster
+Name Goupix
+Type Feu
+HP 38 48
+Speed 65 75
+Attack 41 51
+Defense 40 50
+AttackSpe 50 60
+DefenseSpe 65 75
+EndMonster
+
+Monster
+Name Taupiqueur
+Type Terre
+HP 10 20
+Speed 95 105
+Attack 55 65
+Defense 25 35
+AttackSpe 35 45
+DefenseSpe 45 55
+EndMonster
+
+Monster
+Name Psykokwak
+Type Eau
+HP 50 60
+Speed 55 65
+Attack 52 62
+Defense 48 58
+AttackSpe 65 75
+DefenseSpe 50 60
+EndMonster
+
+Monster
+Name Caninos
+Type Feu
+HP 55 65
+Speed 60 70
+Attack 70 80
+Defense 45 55
+AttackSpe 70 80
+DefenseSpe 50 60
+EndMonster
+
+Monster
+Name Ptitard
+Type Eau
+HP 40 50
+Speed 90 100
+Attack 50 60
+Defense 40 50
+AttackSpe 40 50
+DefenseSpe 40 50
+EndMonster
+
+Monster
+Name Chetiflor
+Type Plante
+HP 50 60
+Speed 40 50
+Attack 75 85
+Defense 35 45
+AttackSpe 70 80
+DefenseSpe 30 40
+EndMonster
+
+Monster
+Name Racaillou
+Type Terre
+HP 40 50
+Speed 20 30
+Attack 80 90
+Defense 100 110
+AttackSpe 30 40
+DefenseSpe 30 40
 EndMonster

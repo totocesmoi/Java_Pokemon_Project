@@ -7,11 +7,11 @@ public class Competence {
     private String name;
     private Types type;
     private Categories category;
-    private Integer pp;
+    private int pp;
     private Effects effect = Effects.NONE;
-    private Integer effectRate = 0;
-    private Integer power = 0;
-    private Integer accuracy = 100;
+    private int effectRate = 0;
+    private int power = 0;
+    private int accuracy = 100;
 
     public void setName (String value) {
         this.name = value;
@@ -19,6 +19,10 @@ public class Competence {
 
     public void setType (Types value) {
         this.type = value;
+    }
+
+    public void setCategory (Categories value) {
+        this.category = value;
     }
 
     public void setCategory (String value) {
@@ -31,19 +35,31 @@ public class Competence {
             this.category = Categories.SPECIAL;
     }
 
-    public void setPP (Integer value) {
+    public void setPP (int value) {
         this.pp = value;
+    }
+
+    public void setEffect (Effects value) {
+        this.effect = value;
     }
 
     public void setEffect (String value) {
         // Les effets sont definis, donc transformer
         switch (value) {
-            case "Poison":
-                this.effect = Effects.POISON;
+            case "Hidden":
+                this.effect = Effects.HIDDEN;
                 break;
 
-            case "Frozen":
-                this.effect = Effects.FROZEN;
+            case "Paralyze":
+                this.effect = Effects.PARALYZE;
+                break;
+
+            case "Flooded" :
+                this.effect = Effects.FLOODED;
+                break;
+
+            case "Restore" :
+                this.effect = Effects.RESTORE;
                 break;
                 
             case "Burned":
@@ -52,15 +68,15 @@ public class Competence {
         }
     }
 
-    public void setEffectRate (Integer value) {
+    public void setEffectRate (int value) {
         this.effectRate = value;
     }
 
-    public void setPower (Integer value) {
+    public void setPower (int value) {
         this.power = value;
     }
 
-    public void setAccuracy (Integer value) {
+    public void setAccuracy (int value) {
         this.accuracy = value;
     }
 
@@ -80,17 +96,19 @@ public class Competence {
         return effect;
     }
 
-    public Integer getEffectRate() {
+    public int getEffectRate() {
         return effectRate;
     }
 
-    public Integer getPower() {
+    public int getPower() {
         return power;
     }
 
-    public Integer getAccuracy() {
+    public int getAccuracy() {
         return accuracy;
     }
+
+    public int getPp() {return pp;}
 
     @Override
     public String toString() {
