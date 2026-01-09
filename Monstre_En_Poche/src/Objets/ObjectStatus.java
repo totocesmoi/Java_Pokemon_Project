@@ -1,12 +1,12 @@
 package Objets;
 
 import Monstres.Monstre;
-import Monstres.Enum.Status;
+import Shared.Effects;
 
-public class ObjectStatus extends Object{
-    private Status statusSoigne;
+public class ObjectStatus extends Object {
+    private Effects statusSoigne;
 
-    public ObjectStatus(String name, Status statusSoigne) {
+    public ObjectStatus(String name, Effects statusSoigne) {
         super(name);
         this.statusSoigne = statusSoigne;
     }
@@ -14,7 +14,7 @@ public class ObjectStatus extends Object{
     @Override
     public void useObject(Monstre monstre) {
         if (monstre.getStatus() == statusSoigne) {
-            monstre.setStatus(Status.NONE);
+            monstre.setStatus(Effects.NONE);
             System.out.println(monstre.getName() + " n'est plus " + statusSoigne);
         } else {
             System.out.println("Cela n'a aucun effet sur " + monstre.getName());

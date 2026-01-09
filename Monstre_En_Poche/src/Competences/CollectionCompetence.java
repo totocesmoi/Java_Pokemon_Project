@@ -1,6 +1,8 @@
 package Competences;
 
+import Shared.Extension;
 import Shared.IParser;
+import Shared.Types;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -37,8 +39,6 @@ public class CollectionCompetence implements IParser {
         String[] data = sb.toString().replaceAll("Attack\\R", "").trim().split("End");
         for (String competenceStr : data) { // Analyse des lignes de la competence
             Competence competence = new Competence();
-            String category = ""; // Pour la categorie de l'attaque (Spéciale ou Physique)
-            Integer power = 0; // Pour la puissance de l'attaque
             
             // Parse les stats de la competence
             for (String caracteristique : competenceStr.split("\\R")) { // Analyse des lignes de la competence
@@ -50,16 +50,23 @@ public class CollectionCompetence implements IParser {
                         competence.setName(value);
                         break;
                     case "Type":
-                        competence.setType(value);
+                        Types toto = Extension.setType(value);
+                        competence.setType(toto);
                         break;
-                    case "Categorie":
-                        category = value;
+                    case "Category": // Status / Physique / Special
+                        competence.setCategory(value);
                         break;
                     case "Power":
-                        power = Integer.parseInt(value);
+                        competence.setPower(Integer.parseInt(value));
                         break;
                     case "NbUse":
                         competence.setPP(Integer.parseInt(value));
+                        break;
+                    case "Effect":
+                        competence.setEffect(value);
+                        break;
+                    case "EffectRate":
+                        competence.setEffectRate(Integer.parseInt(value));
                         break;
                     case "Accuracy":
                         competence.setAccuracy(Integer.parseInt(value)); 
@@ -70,14 +77,6 @@ public class CollectionCompetence implements IParser {
                 }
 
             }
-
-            if (category.equals("Spe")) { // Si c'est vrai c'est une attaque speciale
-                competence.setAttackSpe(power);
-            }
-            else if (category.equals("Phy")) {
-                competence.setAttack(power);
-            }
-
             this.competences.add(competence);
         }
     }

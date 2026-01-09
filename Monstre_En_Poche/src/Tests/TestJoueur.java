@@ -6,6 +6,8 @@ import Joueurs.Joueur;
 import Monstres.Monstre;
 import Monstres.Enum.Stats;
 import Objets.ObjectStat;
+import Shared.Types;
+
 import java.util.ArrayList;
 
 public class TestJoueur {
@@ -28,10 +30,10 @@ public class TestJoueur {
         Joueur j = new Joueur("Sacha");
         
         // Création de 4 monstres bidons
-        Monstre m1 = createDummyMonstre("M1", "Feu");
-        Monstre m2 = createDummyMonstre("M2", "Eau");
-        Monstre m3 = createDummyMonstre("M3", "Plante");
-        Monstre m4 = createDummyMonstre("M4", "Feu");
+        Monstre m1 = createDummyMonstre("M1", Types.FEU);
+        Monstre m2 = createDummyMonstre("M2", Types.EAU);
+        Monstre m3 = createDummyMonstre("M3", Types.NATURE);
+        Monstre m4 = createDummyMonstre("M4", Types.FEU);
 
         System.out.println("Ajout M1: " + j.addMonster(m1));
         System.out.println("Ajout M2: " + j.addMonster(m2));
@@ -80,12 +82,12 @@ public class TestJoueur {
     public static void testValiditeCompetences() {
         System.out.println("\n--- Test Validité Compétences ---");
         // Monstre de type FEU
-        Monstre dracaufeu = createDummyMonstre("Dracaufeu", "Feu");
+        Monstre dracaufeu = createDummyMonstre("Dracaufeu", Types.FEU);
         
         // Création de compétences
-        Competence cFeu = new Competence(); cFeu.setName("Lance-Flamme"); cFeu.setType("Feu");
-        Competence cNormal = new Competence(); cNormal.setName("Charge"); cNormal.setType("Normal");
-        Competence cEau = new Competence(); cEau.setName("Pistolet à O"); cEau.setType("Eau"); // Invalide
+        Competence cFeu = new Competence(); cFeu.setName("Lance-Flamme"); cFeu.setType(Types.FEU);
+        Competence cNormal = new Competence(); cNormal.setName("Charge"); cNormal.setType(Types.NORMAL);
+        Competence cEau = new Competence(); cEau.setName("Pistolet à O"); cEau.setType(Types.EAU); // Invalide
         
         System.out.println("Test Types:");
         System.out.println("- Ajout Competence Feu sur Monstre Feu : " + dracaufeu.ajouterCompetence(cFeu));
@@ -101,14 +103,14 @@ public class TestJoueur {
 
         System.out.println("\nTest Limite (Max 4):");
         // On a déjà 2 compétences. On en ajoute 2 autres valides.
-        Competence cFeu2 = new Competence(); cFeu2.setName("Flammèche"); cFeu2.setType("Feu");
-        Competence cNormal2 = new Competence(); cNormal2.setName("Griffe"); cNormal2.setType("Normal");
+        Competence cFeu2 = new Competence(); cFeu2.setName("Flammèche"); cFeu2.setType(Types.FEU);
+        Competence cNormal2 = new Competence(); cNormal2.setName("Griffe"); cNormal2.setType(Types.NORMAL);
         
         dracaufeu.ajouterCompetence(cFeu2);
         dracaufeu.ajouterCompetence(cNormal2);
         
         // Maintenant on en a 4. Essayons une 5ème Valide.
-        Competence cFeu3 = new Competence(); cFeu3.setName("Déflagration"); cFeu3.setType("Feu");
+        Competence cFeu3 = new Competence(); cFeu3.setName("Déflagration"); cFeu3.setType(Types.FEU);
         boolean testLimite = dracaufeu.ajouterCompetence(cFeu3);
         System.out.println("Ajout 5ème compétence (Devrait échouer) : " + testLimite);
         
@@ -125,9 +127,9 @@ public class TestJoueur {
     public static void afficherEquipeTest() {
         System.out.println("\n--- Test Affichage Équipe ---");
         Joueur j = new Joueur("Pierre");
-        Monstre m = createDummyMonstre("Onix", "Roche");
+        Monstre m = createDummyMonstre("Onix", Types.NATURE);
         
-        Competence c = new Competence(); c.setName("Jet-Pierres"); c.setType("Roche");
+        Competence c = new Competence(); c.setName("Jet-Pierres"); c.setType(Types.NATURE);
         m.ajouterCompetence(c);
         
         j.addMonster(m);
@@ -144,7 +146,7 @@ public class TestJoueur {
         }
     }
 
-    private static Monstre createDummyMonstre(String name, String type) {
+    private static Monstre createDummyMonstre(String name, Types type) {
         return new Monstre(name, type, "Base", 100, 10, 10, 10, 10, 10, new ArrayList<>());
     }
 }
