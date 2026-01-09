@@ -16,10 +16,10 @@ public class Main {
         // testsCompetence.testChargementCompetence();
 
         CollectionCompetence collectionCompetence = new CollectionCompetence();
-        collectionCompetence.load("src/Competences/Competences.txt");
+        collectionCompetence.load("./Competences/Competences.txt");
 
         CollectionMonstres collectionMonstres = new CollectionMonstres();
-        collectionMonstres.load("src/Monstres/Monstres.txt");
+        collectionMonstres.load("./Monstres/Monstres.txt");
 
         // Menu de gestion
         int startMenu = 1;

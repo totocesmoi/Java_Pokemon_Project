@@ -57,6 +57,20 @@ Le jeu gère les altérations d'état (Brûlure, Poison, etc.). De plus, des mé
 *   **Design Patterns** : Utilisation de modèles comme *Strategy* (IA), *Factory* (Création d'objets) et *State* (Gestion des phases de jeu).
 *   **Tests Unitaires** : Validation des mécaniques critiques (ex: Calculs de dégâts, application des effets) via des classes de test dédiées.
 
+## ⚙️ Prérequis et Compilation
+
+Pour le bon fonctionnement du projet, veuillez noter les points suivants :
+
+*   **Java SDK** : Le projet nécessite **Java 17** au minimum.
+*   **Compilation** : Le programme doit être compilé et exécuté depuis le dossier `src` pour garantir le chargement correct des fichiers de ressources (chemins relatifs).
+
+**Commandes recommandées :**
+```bash
+cd src
+javac Main.java
+java Main
+```
+
 ---
 
 ## 📂 Structure du Projet
@@ -79,3 +93,7 @@ Monstre_En_Poche/
 L'architecture globale du projet est représentée ci-dessous :
 
 ![Diagramme UML](UML.png)
+
+## Produced by
+- MANON-MAZA Noann
+- MUZARD Thomas

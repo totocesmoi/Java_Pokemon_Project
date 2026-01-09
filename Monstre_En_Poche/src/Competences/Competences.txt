@@ -35,7 +35,6 @@ Attack
 Name Tranch'Herbe
 Type Plante
 Category Phy
-Effect None
 Power 55
 NbUse 25
 Accuracy 95
@@ -45,8 +44,6 @@ Attack
 Name Lance-Soleil
 Type Plante
 Category Spe
-Effect Restore
-EffectRate 30
 Power 120
 NbUse 10
 Accuracy 100
@@ -142,6 +139,8 @@ Category Phy
 Power 80
 NbUse 15
 Accuracy 100
+Effect Poison
+EffectRate 20
 EndAttack
 
 Attack
@@ -151,6 +150,8 @@ Category Phy
 Power 25
 NbUse 20
 Accuracy 95
+Effect Poison
+EffectRate 10
 EndAttack
 
 Attack
@@ -160,8 +161,8 @@ Category Phy
 Power 80
 NbUse 10
 Accuracy 100
-Effect Restore
-EffectRate 100
+Effect Poison
+EffectRate 10
 EndAttack
 
 Attack
