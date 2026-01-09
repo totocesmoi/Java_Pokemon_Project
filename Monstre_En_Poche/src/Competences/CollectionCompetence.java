@@ -1,6 +1,8 @@
 package Competences;
 
+import Shared.Extension;
 import Shared.IParser;
+import Shared.Types;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -48,7 +50,8 @@ public class CollectionCompetence implements IParser {
                         competence.setName(value);
                         break;
                     case "Type":
-                        competence.setType(value);
+                        Types toto = Extension.setType(value);
+                        competence.setType(toto);
                         break;
                     case "Category": // Status / Physique / Special
                         competence.setCategory(value);

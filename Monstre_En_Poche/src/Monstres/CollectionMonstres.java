@@ -1,6 +1,8 @@
 package Monstres;
 
+import Shared.Extension;
 import Shared.IParser;
+import Shared.Types;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -47,7 +49,8 @@ public class CollectionMonstres implements IParser {
                                 break;
                             case "Type":
                                 if (parts.length > 1) {
-                                    currentMonstre.setType(parts[1]);
+                                    Types toto = Extension.setType(parts[1]);
+                                    currentMonstre.setType(toto);
                                 }
                                 break;
                             case "Category":

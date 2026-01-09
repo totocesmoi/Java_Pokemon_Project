@@ -1,8 +1,10 @@
 package Monstres;
 
+import Shared.Types;
+
 public class MonstreVM {
     private String name;
-    private String type;
+    private Types type;
     private String category;
     private int hpMin;
     private int hpMax;
@@ -17,7 +19,7 @@ public class MonstreVM {
     private int speedMin;
     private int speedMax;
 
-    public MonstreVM(String name, String type, String category, int hpMin, int hpMax, int attackMin,
+    public MonstreVM(String name, Types type, String category, int hpMin, int hpMax, int attackMin,
                      int attackMax, int attackSpeMin, int attackSpeMax, int defenseMin, int defenseMax,
                      int defenseSpeMin,int defenseSpeMax, int speedMin, int speedMax) {
         this.name = name;
@@ -42,7 +44,7 @@ public class MonstreVM {
 
     // Getters
     public String getName() { return name; }
-    public String getType() { return type; }
+    public Types getType() { return type; }
     public String getCategory() { return category; }
     public int getHpMin() { return hpMin; }
     public int getHpMax() { return hpMax; }
@@ -65,7 +67,7 @@ public class MonstreVM {
         this.category = category;
     }
 
-    public void setType(String type) {
+    public void setType(Types type) {
         this.type = type;
     }
 

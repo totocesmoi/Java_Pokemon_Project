@@ -6,6 +6,8 @@ import Joueurs.Joueur;
 import Monstres.CollectionMonstres;
 import Monstres.Monstre;
 import Monstres.MonstreVM;
+import Shared.Types;
+
 import static Shared.Random.randInt;
 import java.util.ArrayList;
 import java.util.Random;
@@ -144,13 +146,13 @@ public class ManageTeam {
         }
     }
 
-    private ArrayList<Competence> chooseSkill(String typeMonstre) {
+    private ArrayList<Competence> chooseSkill(Types typeMonstre) {
         ArrayList<Competence> choisies = new ArrayList<>();
         ArrayList<Competence> disponibles = new ArrayList<>();
 
         // Filtrer les compétences : Type du monstre OU Type "Normal"
         for (Competence c : collectionCompetence.competences) {
-            if (c.getType().equalsIgnoreCase(typeMonstre) || c.getType().equalsIgnoreCase("Normal")) {
+            if (c.getType() == (typeMonstre) || c.getType() == Types.NORMAL) {
                 disponibles.add(c);
             }
         }

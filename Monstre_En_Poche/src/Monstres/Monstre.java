@@ -100,6 +100,13 @@ public class Monstre {
         this.status = status;
     }
 
+    public Types getType() {
+        return type;
+    }
+    public void setType(Types type) {
+        this.type = type;
+    }
+
     /**
      * @brief : Méthode allow to attack other monster
      * @param target : monster target
@@ -124,7 +131,7 @@ public class Monstre {
             System.out.println("Le monstre a deja 4 competences.");
             return false;
         } 
-        if (!c.getType().equalsIgnoreCase("Normal") && !c.getType().equalsIgnoreCase(this.type)) {
+        if (!(c.getType() == Types.NORMAL) && !(c.getType() == this.type)) {
             System.out.println("Type incompatible (Monstre: " + type + ", Competence: " + c.getType() + ")");
             return false;
         }
@@ -159,12 +166,7 @@ public class Monstre {
         return this.ptnVie <= 0;
     }
 
-    public Types getType() {
-        return type;
-    }
-    private void setType(Types type) {
-        this.type = type;
-    }
+
 
     public ArrayList<Competence> getCompetences() {
         return competences;

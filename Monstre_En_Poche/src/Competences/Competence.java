@@ -17,32 +17,8 @@ public class Competence {
         this.name = value;
     }
 
-    public void setType (String value) {
-        // Les type sont definis, donc transformer
-        switch (value) {
-            case "Feu":
-                this.type = Types.FEU;
-                break;
-        
-            case "Eau":
-                this.type = Types.EAU;
-                break;
-        
-            case "Nature":
-                this.type = Types.NATURE;
-                break;
-        
-            case "Foudre":
-                this.type = Types.FOUDRE;
-                break;
-        
-            case "Terre":
-                this.type = Types.TERRE;
-                break;
-        
-            default:
-                break;
-        }
+    public void setType (Types value) {
+        this.type = value;
     }
 
     public void setCategory (String value) {
