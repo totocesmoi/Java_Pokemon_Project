@@ -27,6 +27,9 @@ public class Joueur {
     public String getName() {
         return name;
     }
+    public List<Object> getBag() {
+        return bag;
+    }
 
 
 
@@ -106,7 +109,4 @@ public class Joueur {
         }
         return null;
     }
-
-
-
 }

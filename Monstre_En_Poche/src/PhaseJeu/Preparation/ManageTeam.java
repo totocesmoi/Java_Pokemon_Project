@@ -6,9 +6,8 @@ import Joueurs.Joueur;
 import Monstres.CollectionMonstres;
 import Monstres.Monstre;
 import Monstres.MonstreVM;
-import Shared.Types;
-
 import static Shared.Random.randInt;
+import Shared.Types;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -30,10 +29,11 @@ public class ManageTeam {
             System.out.println("\n--- Team Manager : " + joueur.getName() + " ---");
             System.out.println("1. Add monster");
             System.out.println("2. Show my team");
-            System.out.println("3. Exit");
+            System.out.println("3. Back");
             System.out.print("Choice : ");
 
             String choix = scanner.nextLine();
+            System.out.print("\033[H\033[2J");
 
             switch (choix) {
                 case "1":
@@ -67,7 +67,6 @@ public class ManageTeam {
         Monstre nouveauMonstre = new Monstre(
                 vm.getName(),
                 vm.getType(),
-                vm.getCategory(),
                 stats[0],
                 stats[1],
                 stats[2],

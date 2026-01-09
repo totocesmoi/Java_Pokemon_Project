@@ -2,16 +2,14 @@ package Monstres;
 
 import Competences.Competence;
 import PhaseJeu.Combat.CalculateurDegats;
-import java.util.ArrayList;
-
 import Shared.Effects;
-import Shared.Types;
 import Shared.Pair;
+import Shared.Types;
+import java.util.ArrayList;
 
 public class Monstre {
     private String name;
     private Types type;
-    private String category; // A quoi sert cette variable ?
     private Effects status;
     private int ptnVie;
     private int attack;
@@ -22,12 +20,11 @@ public class Monstre {
 
     public ArrayList<Competence> competences;
 
-    public Monstre(String name, Types type, String category,int ptnVie, int attack, int attackSpe,
+    public Monstre(String name, Types type,int ptnVie, int attack, int attackSpe,
                    int defense, int defenseSpe, int speed, ArrayList<Competence> competences) {
         this.name = name;
         this.type = type;
         this.status = Effects.NONE;
-        this.category = category;
         this.ptnVie = ptnVie;
         this.attack = attack;
         this.attackSpe = attackSpe;
@@ -86,13 +83,6 @@ public class Monstre {
         this.name = name;
     }
 
-    public String getCategory() {
-        return category;
-    }
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public Effects getStatus() {
         return status;
     }
@@ -113,7 +103,9 @@ public class Monstre {
      * @param competence : skill use to attack the monster
      */
     public void attackMonster(Monstre target, Competence competence) {
-        System.out.println(this.name + " use " + competence.getName() + " on " + target.getName() + " !");
+        String attackName = (competence != null) ? competence.getName() : "Attaque à main nue";
+        System.out.println(this.name + " use " + attackName + " on " + target.getName() + " !");
+
         Pair<Double, Effects> damages = CalculateurDegats.calculerDegats(this, target, competence);
 
         target.receivedDamage((int) Math.round(damages.getKey()));
@@ -181,7 +173,6 @@ public class Monstre {
         return "Monstre{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
-                ", category='" + category + '\'' +
                 ", status='" + status.toString() + '\'' +
                 ", ptnVie=" + ptnVie +
                 ", attack=" + attack +

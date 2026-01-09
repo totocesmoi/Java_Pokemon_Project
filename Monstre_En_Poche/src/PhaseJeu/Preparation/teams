@@ -1,0 +1,17 @@
+Team
+Name Noann
+Monstre 
+Name Pikachu
+Category Special
+Type Electric
+HP 141
+Speed 110
+Attack 75
+Defense 82
+EndMonstre
+ObjectStat
+Name Heal
+Stat HP
+Value 10
+EndObjectStat
+EndTeam

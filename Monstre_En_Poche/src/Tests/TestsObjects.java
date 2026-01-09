@@ -20,7 +20,7 @@ public class TestsObjects {
     public static void testObjets() {
         System.out.println("Début des tests des objets...");
 
-        Monstre monstre = new Monstre("TestMonstre", Types.NORMAL, "Test", 100, 50, 50, 50, 50, 50, new ArrayList<>());
+        Monstre monstre = new Monstre("TestMonstre", Types.NORMAL, 100, 50, 50, 50, 50, 50, new ArrayList<>());
         System.out.println("Monstre initial: " + monstre.getName() + " PV=" + monstre.getPtnVie() + " Status=" + (monstre.getStatus() == null ? "NONE" : monstre.getStatus()));
 
         System.out.println("\n--- Test Potion (+20 PV) ---");

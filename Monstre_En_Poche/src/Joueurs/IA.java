@@ -1,13 +1,10 @@
 package Joueurs;
 
 import Competences.Competence;
-import Competences.Enum.Categories;
 import Monstres.Monstre;
 import Monstres.MonstreVM;
-import Shared.Effects;
 import Shared.Types;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -46,7 +43,7 @@ public abstract class IA extends Joueur {
         int defSpe = randomStat(vm.getDefenseSpeMin(), vm.getDefenseSpeMax());
         int speed = randomStat(vm.getSpeedMin(), vm.getSpeedMax());
 
-        return new Monstre(vm.getName(), vm.getType(), vm.getCategory(), hp, atk, atkSpe, def, defSpe, speed, new ArrayList<>());
+        return new Monstre(vm.getName(), vm.getType(), hp, atk, atkSpe, def, defSpe, speed, new ArrayList<>());
     }
     
     private int randomStat(int min, int max) {

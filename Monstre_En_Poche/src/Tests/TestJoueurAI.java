@@ -2,14 +2,12 @@ package Tests;
 
 import Competences.CollectionCompetence;
 import Competences.Competence;
-import Competences.Enum.Categories;
 import Joueurs.IAExpert;
 import Joueurs.IARandom;
 import Joueurs.Joueur;
 import Monstres.CollectionMonstres;
 import Monstres.Monstre;
 import Monstres.MonstreVM;
-import Shared.Effects;
 import Shared.Types;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +55,7 @@ public class TestJoueurAI {
         // Test de prise de décision
         Monstre attaquant = ia.getActifMonster();
         // Cible pour tester
-        Monstre cible = new Monstre("Poutchichou", Types.NORMAL, "Dummy", 100, 10, 10, 10, 10, 10, new ArrayList<>());
+        Monstre cible = new Monstre("Poutchichou", Types.NORMAL, 100, 10, 10, 10, 10, 10, new ArrayList<>());
         
         System.out.println("Monstre actif IA : " + attaquant.getName() + " (" + attaquant.getType() + ")");
         Competence choix = ia.choisirCompetence(cible);
@@ -78,7 +76,7 @@ public class TestJoueurAI {
         Monstre attaquant = ia.getActifMonster();
         // Créons une cible spécifique pour tester l'intelligence
         // Si l'IA a un monstre EAU, mettons une cible FEU pour voir si elle tape EAU.
-        Monstre cible = new Monstre("Cible-Test", Types.FEU, "Dummy", 500, 0, 0, 0, 0, 0, new ArrayList<>());
+        Monstre cible = new Monstre("Cible-Test", Types.FEU, 500, 0, 0, 0, 0, 0, new ArrayList<>());
         
         System.out.println("Monstre actif IA : " + attaquant.getName() + " (" + attaquant.getType() + ")");
         System.out.println("Cible : " + cible.getName() + " (" + cible.getType() + ")");
