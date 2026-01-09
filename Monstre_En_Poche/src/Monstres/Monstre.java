@@ -119,6 +119,26 @@ public class Monstre {
         System.out.print("\n");
     }
 
+    public boolean peutApprendre(Competence c) {
+        if (competences.size() >= 4) {
+            System.out.println("Le monstre a deja 4 competences.");
+            return false;
+        } 
+        if (!c.getType().equalsIgnoreCase("Normal") && !c.getType().equalsIgnoreCase(this.type)) {
+            System.out.println("Type incompatible (Monstre: " + type + ", Competence: " + c.getType() + ")");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean ajouterCompetence(Competence c) {
+        if (peutApprendre(c)) {
+            competences.add(c);
+            return true;
+        }
+        return false;
+    }
+
     /**
      * @brief : Allow to receive any damage for the current monster
      * @param damage : number indicate how many damages, the monster received
