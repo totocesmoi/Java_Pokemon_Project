@@ -7,6 +7,7 @@ import Monstres.CollectionMonstres;
 import Monstres.Monstre;
 import Monstres.MonstreVM;
 import static Shared.Random.randInt;
+import Shared.ReadInt;
 import Shared.Types;
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,6 +18,34 @@ public class ManageTeam {
     private CollectionMonstres collectionMonstres;
     private CollectionCompetence collectionCompetence;
 
+    // ANSI styling
+    private final String ANSI_BOLD = "\u001B[1m";
+    private final String ANSI_UNDERLINE = "\u001B[4m";
+    private final String ANSI_RESET = "\u001B[0m";
+    private final String ANSI_GREEN = "\u001B[32m";
+    private final String ANSI_YELLOW = "\u001B[33m";
+    private final String ANSI_RED = "\u001B[31m";
+
+    private void printSeparator() {
+        System.out.println(ANSI_BOLD + "==============================================" + ANSI_RESET);
+    }
+
+    private String renderHpBar(int current, int max, int length) {
+        if (max <= 0) max = 1;
+        double ratio = (double) current / max;
+        int filled = (int) Math.round(ratio * length);
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < length; i++) {
+            if (i < filled) sb.append("#"); else sb.append("-");
+        }
+        sb.append("]");
+        String color = ANSI_GREEN;
+        if (ratio < 0.33) color = ANSI_RED;
+        else if (ratio < 0.66) color = ANSI_YELLOW;
+        return color + sb.toString() + ANSI_RESET;
+    }
+
     public ManageTeam(CollectionMonstres collectionMonstres, CollectionCompetence collectionCompetence) {
         this.scanner = new Scanner(System.in);
         this.collectionMonstres = collectionMonstres;
@@ -26,11 +55,13 @@ public class ManageTeam {
     public void menuGestionEquipe(Joueur joueur) {
         boolean continuer = true;
         while (continuer) {
-            System.out.println("\n--- Team Manager : " + joueur.getName() + " ---");
+            System.out.println();
+            printSeparator();
+            System.out.println(ANSI_BOLD + "         Team Manager : " + joueur.getName() + ANSI_RESET);
             System.out.println("1. Add monster");
             System.out.println("2. Show my team");
             System.out.println("3. Back");
-            System.out.print("Choice : ");
+            System.out.print(ANSI_UNDERLINE + "Choice :" + ANSI_RESET + " ");
 
             String choix = scanner.nextLine();
             System.out.print("\033[H\033[2J");
@@ -82,29 +113,27 @@ public class ManageTeam {
     }
 
     private MonstreVM chooseModeleStatMonster() {
-        System.out.println("\n--- Choice your monster ---");
+        printSeparator();
+        System.out.println(ANSI_BOLD + "         Choice your monster" + ANSI_RESET);
         ArrayList<MonstreVM> monstres = collectionMonstres.monstres;
         for (int i = 0; i < monstres.size(); i++) {
             System.out.println((i + 1) + ". " + monstres.get(i).getName() +
             " (" + monstres.get(i).getType() + ")");
         }
         System.out.print("Choice (0 to exit) : ");
-        try {
-            int choix = Integer.parseInt(scanner.nextLine());
-            if (choix > 0 && choix <= monstres.size()) {
-                return monstres.get(choix - 1);
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Error : Invalid stdin.");
+        int choix = ReadInt.readInt(scanner, 0, monstres.size());
+        if (choix > 0 && choix <= monstres.size()) {
+            return monstres.get(choix - 1);
         }
         return null;
     }
 
     private int[] defineStats(MonstreVM vm) {
-        System.out.println("\n--- Choose your monster stats ---");
+        printSeparator();
+        System.out.println(ANSI_BOLD + "         Choose your monster stats" + ANSI_RESET);
         System.out.println("1. Random");
         System.out.println("2. Manual");
-        System.out.print("Choice : ");
+        System.out.print(ANSI_UNDERLINE + "Choice :" + ANSI_RESET + " ");
         String mode = scanner.nextLine();
 
         int hp, atk, atkSpe, def, defSpe, speed;
@@ -132,16 +161,9 @@ public class ManageTeam {
 
     private int requestStat(String nomStat, int min, int max) {
         while (true) {
-            System.out.print(nomStat + " (" + min + "-" + max + ") : ");
-            try {
-                int val = Integer.parseInt(scanner.nextLine());
-                if (val >= min && val <= max) {
-                    return val;
-                }
-                System.out.println("Index value out of range.");
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid stdin.");
-            }
+                System.out.print(nomStat + " (" + min + "-" + max + ") : ");
+                int val = ReadInt.readInt(scanner, min, max);
+                return val;
         }
     }
 
@@ -156,7 +178,8 @@ public class ManageTeam {
             }
         }
         
-        System.out.println("\n--- Choisir des Compétences (Max 4) ---");
+        System.out.println(ANSI_BOLD + "=================================================" + ANSI_RESET);
+        System.out.println(ANSI_BOLD + "         Choisir des Compétences (Max 4)" + ANSI_RESET);
         
         if (disponibles.isEmpty()) {
             System.out.println("Aucune compétence disponible pour ce type.");
@@ -168,38 +191,39 @@ public class ManageTeam {
         }
 
         while (choisies.size() < 4) {
-            System.out.println("Compétences actuelles : " + choisies.size() + "/4");
+            System.out.println("Compétences actuelles : " + ANSI_UNDERLINE + choisies.size() + "/4" + ANSI_RESET);
             System.out.print("Entrez le numéro de la compétence à ajouter (0 pour finir) : ");
-            try {
-                int choix = Integer.parseInt(scanner.nextLine());
-                if (choix == 0) break;
-                if (choix > 0 && choix <= disponibles.size()) {
-                    Competence c = disponibles.get(choix - 1);
-                    if (!choisies.contains(c)) {
-                        choisies.add(c);
-                        System.out.println(c.getName() + " ajoutée.");
-                    } else {
-                        System.out.println("Déjà sélectionnée.");
-                    }
+            int choix = ReadInt.readInt(scanner, 0, disponibles.size());
+            if (choix == 0) break;
+            if (choix > 0 && choix <= disponibles.size()) {
+                Competence c = disponibles.get(choix - 1);
+                if (!choisies.contains(c)) {
+                    choisies.add(c);
+                    System.out.println(c.getName() + " ajoutée.");
                 } else {
-                    System.out.println("Invalide.");
+                    System.out.println("Déjà sélectionnée.");
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Entrée invalide.");
+            } else {
+                System.out.println("Invalide.");
             }
         }
         return choisies;
     }
 
     private void showTeam(Joueur joueur) {
-        System.out.println("\n--- " + joueur.getName() + " team ---");
+        System.out.println();
+        printSeparator();
+        System.out.println(ANSI_BOLD + joueur.getName() + " team" + ANSI_RESET);
         for (Monstre m : joueur.getTeam()) {
-            System.out.println("- " + m.getName() + " (PV: " + m.getPtnVie() + ")");
+            int hp = m.getPtnVie();
+            int max = Math.max(1, hp); // no stored max here, show proportional bar (full)
+            System.out.println("- " + ANSI_BOLD + m.getName() + ANSI_RESET + " " + renderHpBar(hp, max, 20) + " " + hp + "/" + max + " [" + m.getStatus() + "]");
             System.out.print("  Skills: ");
             for(Competence c : m.competences) {
-                System.out.print(c.toString() + " ");
+                System.out.print(c.getName() + " ");
             }
             System.out.println();
         }
+        printSeparator();
     }
 }

@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         // TestsMonstre tests = new TestsMonstre();
-        // tests.testChargementMonstres();
 
         // TestsCompetence testsCompetence = new TestsCompetence();
         // testsCompetence.testChargementCompetence();
@@ -29,27 +28,36 @@ public class Main {
         ManageTeam teamManager = new ManageTeam(collectionMonstres, collectionCompetence);
         ManageCombat combatManager = new ManageCombat();
 
+        // ANSI styling for main menu
+        final String BOLD = "\u001B[1m";
+        final String UNDERLINE = "\u001B[4m";
+        final String RESET = "\u001B[0m";
+
         while (startMenu != 4) {
             System.out.print("\033[H\033[2J");
-            System.out.println("\n--------------------------------------------------\n");
+            System.out.println();
+            System.out.println(BOLD + "==================================================" + RESET);
+            System.out.println(BOLD + "         Welcome to Monstre En Poche" + RESET);
+            System.out.println(UNDERLINE + "Main Menu" + RESET);
             System.out.println("1. Team Management");
             System.out.println("2. Combat Settings");
             System.out.println("3. Launch Game");
             System.out.println("4. Exit");
-            System.out.println("\nChoice : ");
-            
+            System.out.print(UNDERLINE + "Choice :" + RESET + " ");
+
             String choix = scanner.nextLine();
             System.out.print("\033[H\033[2J");
             switch (choix) {
                 case "1":
                     if (!players.isEmpty()) {
-                        System.out.println("Which player do you want to manage?");
+                        System.out.println(BOLD + "==================================================" + RESET);
+                        System.out.println("         Which player do you want to manage?");
                         for (int i = 0; i < players.size(); i++) {
                             System.out.println((i + 1) + ". " + players.get(i).getName());
                         }
                         System.out.println((players.size() + 1) + ". Create new player");
                         System.out.println((players.size() + 2) + ". Back");
-                        System.out.println("\nChoice : ");
+                        System.out.print(UNDERLINE + "Choice :" + RESET + " ");
                         String playerChoice = scanner.nextLine();
                         System.out.print("\033[H\033[2J");
                         

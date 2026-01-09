@@ -3,7 +3,6 @@ package Monstres;
 import Shared.Extension;
 import Shared.IParser;
 import Shared.Types;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

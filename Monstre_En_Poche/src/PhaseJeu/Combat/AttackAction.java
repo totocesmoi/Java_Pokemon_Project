@@ -19,6 +19,10 @@ public class AttackAction implements IAction {
     }
 
     @Override public void execute() {
+        if (attacker.isKO()) {
+            System.out.println("Cannot attack with a KO'd monster.");
+            return;
+        }
         attacker.attackMonster(target.getActifMonster(), competence);
     }
 }

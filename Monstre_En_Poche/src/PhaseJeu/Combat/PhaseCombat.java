@@ -2,6 +2,9 @@ package PhaseJeu.Combat;
 import Joueurs.Joueur;
 import Monstres.Monstre;
 import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
+import Shared.ReadInt;
 
 public class PhaseCombat {
     int turn;
@@ -33,7 +36,7 @@ public class PhaseCombat {
                     System.out.println((i + 1) + ". " + player1.getActifMonster().getCompetences().get(i).getName());
                 }
                 System.out.print("Choisissez une attaque : ");
-                int attaqueChoisie = Integer.parseInt(scanner.nextLine()) - 1;
+                int attaqueChoisie = ReadInt.readInt(scanner, 1, player1.getActifMonster().getCompetences().size()) - 1;
                 return new AttackAction(player1.getActifMonster(), player2, player1.getActifMonster().getCompetences().get(attaqueChoisie));
             case "2":
                 // Changer de monstre
@@ -45,7 +48,12 @@ public class PhaseCombat {
                     System.out.println((i + 1) + ". " + player1.getTeam().get(i).getName());
                 }
                 System.out.print("Choisissez un monstre : ");
-                int monstreChoisi = Integer.parseInt(scanner.nextLine()) - 1;
+                int monstreChoisi;
+                while (true) {
+                    monstreChoisi = ReadInt.readInt(scanner, 1, player1.getTeam().size()) - 1;
+                    if (!player1.getTeam().get(monstreChoisi).isKO()) break;
+                    System.out.println("Monstre KO, choisissez-en un autre.");
+                }
                 return new SwitchAction(player1, monstreChoisi);
             case "3":
                 // Utiliser un objet
@@ -53,16 +61,21 @@ public class PhaseCombat {
                 for (int i = 0; i < player1.getBag().size(); i++) {
                     System.out.println((i + 1) + ". " + player1.getBag().get(i).getName());
                 }
+                if (player1.getBag().isEmpty()) {
+                    System.out.println("Aucun objet disponible.");
+                    return selectAction(player1, player2, scanner);
+                }
                 System.out.print("Choisissez un objet : ");
-                int objetChoisi = Integer.parseInt(scanner.nextLine()) - 1;
+                int objetChoisi = ReadInt.readInt(scanner, 1, player1.getBag().size()) - 1;
                 return new ItemAction(player1, objetChoisi);
             case "4":
                 // Declarer forfait
                 System.out.println(player1.getName() + " a declare forfait. " + player2.getName() + " gagne le combat !");
-                // exit(0);
-                return null;
+                System.exit(0);
             default:
-                return null;
+                System.out.println("Choix invalide, veuillez reessayer.");
+                return selectAction(player1, player2, scanner);
+
         }
     }
 
@@ -85,10 +98,15 @@ public class PhaseCombat {
                 System.out.println((i + 1) + ". " + player1.getTeam().get(i).getName());
             }
             System.out.print("Choisissez un monstre : ");
-            int monstreChoisi = Integer.parseInt(scanner.nextLine()) - 1;
-            player1.changeMonster(monstreChoisi);
+            int monstreChoisi1;
+            while (true) {
+                monstreChoisi1 = ReadInt.readInt(scanner, 1, player1.getTeam().size()) - 1;
+                if (!player1.getTeam().get(monstreChoisi1).isKO()) break;
+                System.out.println("Monstre KO, choisissez-en un autre.");
+            }
+            player1.changeMonster(monstreChoisi1);
         }
-        
+
         if (player2.getActifMonster().isKO()) {
             System.out.println(player2.getName() + ", choisissez un nouveau monstre :");
             for (int i = 0; i < player2.getTeam().size(); i++) {
@@ -98,9 +116,55 @@ public class PhaseCombat {
                 System.out.println((i + 1) + ". " + player2.getTeam().get(i).getName());
             }
             System.out.print("Choisissez un monstre : ");
-            int monstreChoisi = Integer.parseInt(scanner.nextLine()) - 1;
-            player2.changeMonster(monstreChoisi);
+            int monstreChoisi2;
+            while (true) {
+                monstreChoisi2 = ReadInt.readInt(scanner, 1, player2.getTeam().size()) - 1;
+                if (!player2.getTeam().get(monstreChoisi2).isKO()) break;
+                System.out.println("Monstre KO, choisissez-en un autre.");
+            }
+            player2.changeMonster(monstreChoisi2);
         }
+    }
+
+    // --- Affichage amélioré (ANSI) ---
+    private final String ANSI_BOLD = "\u001B[1m";
+    private final String ANSI_UNDERLINE = "\u001B[4m";
+    private final String ANSI_RESET = "\u001B[0m";
+    private final String ANSI_GREEN = "\u001B[32m";
+    private final String ANSI_YELLOW = "\u001B[33m";
+    private final String ANSI_RED = "\u001B[31m";
+
+    private void printSeparator() {
+        System.out.println(ANSI_BOLD + "==============================================" + ANSI_RESET);
+    }
+
+    private String renderHpBar(int current, int max, int length) {
+        if (max <= 0) max = 1;
+        double ratio = (double) current / max;
+        int filled = (int) Math.round(ratio * length);
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < length; i++) {
+            if (i < filled) sb.append("#"); else sb.append("-");
+        }
+        sb.append("]");
+        String color = ANSI_GREEN;
+        if (ratio < 0.33) color = ANSI_RED;
+        else if (ratio < 0.66) color = ANSI_YELLOW;
+        return color + sb.toString() + ANSI_RESET;
+    }
+
+    private void printBattleHUD(Joueur viewer, Joueur opponent, Map<Monstre, Integer> maxHp) {
+        Monstre me = viewer.getActifMonster();
+        Monstre opp = opponent.getActifMonster();
+        int oppMax = maxHp.getOrDefault(opp, opp.getPtnVie());
+        int meMax = maxHp.getOrDefault(me, me.getPtnVie());
+
+        printSeparator();
+        System.out.println(ANSI_BOLD + "Joueur: " + viewer.getName() + ANSI_RESET + "  |  " + ANSI_UNDERLINE + "Tour: " + turn + ANSI_RESET);
+        System.out.println(ANSI_BOLD + "Votre monstre:" + ANSI_RESET + " " + me.getName() + "  " + renderHpBar(me.getPtnVie(), meMax, 20) + " " + me.getPtnVie() + "/" + meMax + "  [" + me.getStatus() + "]");
+        System.out.println(ANSI_BOLD + "Adversaire:" + ANSI_RESET + " " + opp.getName() + "  " + renderHpBar(opp.getPtnVie(), oppMax, 20) + " " + opp.getPtnVie() + "/" + oppMax + "  [" + opp.getStatus() + "]");
+        printSeparator();
     }
 
     public void combat () {
@@ -109,6 +173,11 @@ public class PhaseCombat {
         
         // Logique de combat ici
         Scanner scanner = new Scanner(System.in);
+
+        // Préparer la table des PV max pour chaque monstre (pour les barres de vie)
+        Map<Monstre, Integer> maxHp = new HashMap<>();
+        for (Monstre m : player1.getTeam()) maxHp.put(m, m.getPtnVie());
+        for (Monstre m : player2.getTeam()) maxHp.put(m, m.getPtnVie());
 
         // Le pokemon de depart avec le plus de vitesse commence
         Monstre m1 = player1.getActifMonster();
@@ -127,12 +196,16 @@ public class PhaseCombat {
             turn++;
 
             // Il faut declarer une variable pour stocker le choix du joueur 1 car il y a des actions prioritaires
-            System.out.println("\n--- Tour " + turn + " ---");
+            m1 = player1.getActifMonster();
+            m2 = player2.getActifMonster();
+            printBattleHUD(player1, player2, maxHp);
             IAction actionP1 = selectAction(player1, player2, scanner);
-            System.out.print("\033[H\033[2J");
-            System.out.println("\n--- Tour " + turn + " ---");
+            // System.out.print("\033[H\033[2J");
+            m1 = player1.getActifMonster();
+            m2 = player2.getActifMonster();
+            printBattleHUD(player2, player1, maxHp);
             IAction actionP2 = selectAction(player2, player1, scanner);
-            System.out.print("\033[H\033[2J");
+            // System.out.print("\033[H\033[2J");
             
 
             if (actionP1.getPriority() < actionP2.getPriority()) {
