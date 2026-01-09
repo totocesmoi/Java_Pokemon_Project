@@ -1,15 +1,18 @@
 package Monstres;
 
 import Competences.Competence;
-import Monstres.Enum.Status;
 import PhaseJeu.Combat.CalculateurDegats;
 import java.util.ArrayList;
 
+import Shared.Effects;
+import Shared.Types;
+import Shared.Pair;
+
 public class Monstre {
     private String name;
-    private String type;
-    private String category;
-    private Status status;
+    private Types type;
+    private String category; // A quoi sert cette variable ?
+    private Effects status;
     private int ptnVie;
     private int attack;
     private int attackSpe;
@@ -19,11 +22,11 @@ public class Monstre {
 
     public ArrayList<Competence> competences;
 
-    public Monstre(String name, String type, String category,int ptnVie, int attack, int attackSpe,
+    public Monstre(String name, Types type, String category,int ptnVie, int attack, int attackSpe,
                    int defense, int defenseSpe, int speed, ArrayList<Competence> competences) {
         this.name = name;
         this.type = type;
-        this.status = null;
+        this.status = Effects.NONE;
         this.category = category;
         this.ptnVie = ptnVie;
         this.attack = attack;
@@ -90,10 +93,10 @@ public class Monstre {
         this.category = category;
     }
 
-    public Status getStatus() {
+    public Effects getStatus() {
         return status;
     }
-    public void setStatus(Status status) {
+    public void setStatus(Effects status) {
         this.status = status;
     }
 
@@ -104,10 +107,16 @@ public class Monstre {
      */
     public void attackMonster(Monstre target, Competence competence) {
         System.out.println(this.name + " use " + competence.getName() + " on " + target.getName() + " !");
+        Pair<Double, Effects> damages = CalculateurDegats.calculerDegats(this, target, competence);
+
+        target.receivedDamage((int) Math.round(damages.getKey()));
+        // Appliquer l'effet si il y en a un
+        if (!target.isKO() && damages.getValue() != Effects.NONE) {
+            System.out.print(" and " + damages.getValue());
+            target.setStatus(damages.getValue());
+        }
         
-        int degats = CalculateurDegats.calculerDegats(this, target, competence);
-        
-        target.receivedDamage(degats);
+        System.out.print("\n");
     }
 
     /**
@@ -119,7 +128,7 @@ public class Monstre {
         if (this.ptnVie < 0) {
             this.ptnVie = 0;
         }
-        System.out.println(this.name + " received " + damage + " damage. Current HP : " + this.ptnVie);
+        System.out.print(this.name + " received " + damage + " damage. Current HP : " + this.ptnVie);
         
         if (this.isKO()) {
             System.out.println(this.name + " is K.O. !");
@@ -130,16 +139,17 @@ public class Monstre {
         return this.ptnVie <= 0;
     }
 
-    public String getType() {
+    public Types getType() {
         return type;
     }
-    private void setType(String type) {
+    private void setType(Types type) {
         this.type = type;
     }
 
     public ArrayList<Competence> getCompetences() {
         return competences;
     }
+
     private void setCompetences(ArrayList<Competence> competences) {
         this.competences = competences;
     }
