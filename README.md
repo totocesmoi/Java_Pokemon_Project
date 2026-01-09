@@ -97,3 +97,5 @@ L'architecture globale du projet est représentée ci-dessous :
 ## Produced by
 - MANON-MAZA Noann
 - MUZARD Thomas
+
+Merci
