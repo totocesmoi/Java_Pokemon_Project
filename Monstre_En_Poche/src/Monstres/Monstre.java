@@ -103,7 +103,6 @@ public class Monstre {
      * @param competence : skill use to attack the monster
      */
     public void attackMonster(Monstre target, Competence competence) {
-        System.out.println("tesyfsgufgsu");
         String attackName = (competence != null) ? competence.getName() : "Attaque à main nue";
         System.out.println(this.name + " use " + attackName + " on " + target.getName() + " !");
 

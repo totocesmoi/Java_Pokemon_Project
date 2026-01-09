@@ -37,12 +37,23 @@ public class PhaseCombat {
                 return new AttackAction(player1.getActifMonster(), player2, player1.getActifMonster().getCompetences().get(attaqueChoisie));
             case "2":
                 // Changer de monstre
-                return null;
+                System.out.println("Monstres disponibles :");
+                for (int i = 0; i < player1.getTeam().size(); i++) {
+                    if (player1.getTeam().get(i).isKO()) {
+                        continue;
+                    }
+                    System.out.println((i + 1) + ". " + player1.getTeam().get(i).getName());
+                }
+                System.out.print("Choisissez un monstre : ");
+                int monstreChoisi = Integer.parseInt(scanner.nextLine()) - 1;
+                return new SwitchAction(player1, monstreChoisi);
             case "3":
                 // Utiliser un objet
                 return null;
             case "4":
                 // Declarer forfait
+                System.out.println(player1.getName() + " a declare forfait. " + player2.getName() + " gagne le combat !");
+                // exit(0);
                 return null;
             default:
                 return null;
@@ -63,7 +74,7 @@ public class PhaseCombat {
         if (m1.getSpeed() >= m2.getSpeed()) {
             System.out.println(player1.getName() + " commence le combat !");
         } else {
-            System.out.println(player2.getName() + "2 commence le combat !"); 
+            System.out.println(player2.getName() + " commence le combat !"); 
         }
 
         while (true) {
@@ -85,15 +96,6 @@ public class PhaseCombat {
             }
 
             turn++;
-            
-            // System.out.println(player1.getName() + ", choisissez une action pour " + player1.getActifMonster().getName() + " :");
-            // System.out.println("1. Attaquer");
-            // System.out.println("2. Changer de monstre");
-            // System.out.println("3. Utiliser un objet");
-            // System.out.println("4. Declarer forfait");
-
-            // String choix = scanner.nextLine();
-            // System.out.print("\033[H\033[2J");
 
             // Il faut declarer une variable pour stocker le choix du joueur 1 car il y a des actions prioritaires
             System.out.println("\n--- Tour " + turn + " ---");
@@ -103,52 +105,6 @@ public class PhaseCombat {
             IAction actionP2 = selectAction(player2, player1, scanner);
             System.out.print("\033[H\033[2J");
             
-            // switch (choix) {
-            //     case "1" :
-            //         // Attaquer
-            //         if (player1.getActifMonster().getCompetences().isEmpty()) {
-            //             System.out.println("Attaque a main nue.");
-            //             actionP1 = new AttackAction(player1.getActifMonster(), player2, null);
-            //             break;
-            //         }
-            //         System.out.println("Attaques disponibles :");
-            //         for (int i = 0; i < player1.getActifMonster().getCompetences().size(); i++) {
-            //             System.out.println((i + 1) + ". " + player1.getActifMonster().getCompetences().get(i).getName());
-            //         }
-            //         System.out.print("Choisissez une attaque : ");
-            //         int attaqueChoisie = Integer.parseInt(scanner.nextLine()) - 1;
-            //         // player1.chooseAttack(attaqueChoisie);
-            //         actionP1 = new AttackAction(player1.getActifMonster(), player2, player1.getActifMonster().getCompetences().get(attaqueChoisie));
-            //         break;
-            //     default:
-            //         throw new AssertionError();
-            // }
-
-            // System.out.println("\n--- Tour " + turn + " ---");
-            // System.out.println(player2.getName() + ", choisissez une action pour " + player2.getActifMonster().getName() + " :");
-            // System.out.println("1. Attaquer");
-            // System.out.println("2. Changer de monstre");
-            // System.out.println("3. Utiliser un objet");
-            // System.out.println("4. Declarer forfait");
-
-            // choix = scanner.nextLine();
-            // System.out.print("\033[H\033[2J");
-
-            // switch (choix) {
-            //     case "1" :
-            //         // Attaquer
-            //         System.out.println("Attaques disponibles :");
-            //         for (int i = 0; i < player2.getActifMonster().getCompetences().size(); i++) {
-            //             System.out.println((i + 1) + ". " + player2.getActifMonster().getCompetences().get(i).getName());
-            //         }
-            //         System.out.print("Choisissez une attaque : ");
-            //         int attaqueChoisie = Integer.parseInt(scanner.nextLine()) - 1;
-            //         actionP2 = new AttackAction(player2.getActifMonster(), player1, player2.getActifMonster().getCompetences().get(attaqueChoisie));
-            //         break;
-            //     default:
-            //         throw new AssertionError();
-            // }
-
 
             if (actionP1.getPriority() < actionP2.getPriority()) {
                 actionP1.execute();
